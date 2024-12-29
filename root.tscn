@@ -1,14 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=6 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="Shader" path="res://mandlebrot.gdshader" id="1_ha4hf"]
+[ext_resource type="Script" path="res://fractal.gd" id="1_lmb48"]
 [ext_resource type="Shader" path="res://julia.gdshader" id="2_on53s"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0txa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxm10"]
+resource_local_to_scene = true
 shader = ExtResource("1_ha4hf")
+shader_parameter/test = 1
+shader_parameter/zoom_center = Vector2(2.5, 2)
+shader_parameter/zoom_amount = Vector2(4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3eno0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bxpv2"]
 shader = ExtResource("2_on53s")
-shader_parameter/input = null
+shader_parameter/cursor = null
+shader_parameter/test = 1
+shader_parameter/zoom_center = Vector2(2, 2)
+shader_parameter/zoom_amount = Vector2(4, 4)
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -21,16 +29,17 @@ grow_vertical = 2
 [node name="Mandlebrot Set" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
+anchor_left = 0.25
 anchor_top = 0.5
-anchor_right = 0.3
+anchor_right = 0.25
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -600.0
+offset_top = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lmb48")
 
 [node name="SubViewport" type="SubViewport" parent="Mandlebrot Set"]
 handle_input_locally = false
@@ -38,7 +47,7 @@ size = Vector2i(1200, 1200)
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="Mandlebrot Set/SubViewport"]
-material = SubResource("ShaderMaterial_s0txa")
+material = SubResource("ShaderMaterial_uxm10")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,21 +61,21 @@ anchor_left = 0.75
 anchor_top = 0.5
 anchor_right = 0.75
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -600.0
+offset_top = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lmb48")
 
 [node name="SubViewport" type="SubViewport" parent="Julia Set"]
 handle_input_locally = false
 size = Vector2i(1200, 1200)
 render_target_update_mode = 4
 
-[node name="JuliaColorRect" type="ColorRect" parent="Julia Set/SubViewport"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_3eno0")
+[node name="ColorRect" type="ColorRect" parent="Julia Set/SubViewport"]
+material = SubResource("ShaderMaterial_bxpv2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
