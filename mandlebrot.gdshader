@@ -18,7 +18,9 @@ vec2 cx_sqrt(vec2 a) {
     return vec2(rpart,ipart);
 }
 
-#define LOOPS  15
+#define LOOPS  18
+
+
 
 
 void fragment() {
@@ -27,29 +29,25 @@ void fragment() {
 	vec2 z = vec2(0);
 	
 	vec2 zp;
-	float dist;
-	bool M = true;
-	float esc;
+	int esc;
 	
 	for(int loops = 0; loops < LOOPS; loops++){
 		zp = cx_mul(z, z) + c;
-		dist = (zp.x * zp.x) + (zp.y * zp.y);
-		
 		z = zp;
 		
-		M = M && abs(dist) <= 4.0;
-		if(!M){
-			esc = float(loops);
+		// compute if it's escaped
+		if(length(zp) >= 4.0){
+			esc = loops;
 			break;
 		}
 	}
 	
 	
-	if(M)
+	if(esc == LOOPS)
 	{
 		COLOR = vec4(vec3(0), 1);
 	} else
 	{
-		COLOR = vec4(0.0, esc/float(LOOPS), 0.5, 1.0);
+		COLOR = vec4(0.0, float(esc)/float(LOOPS), 0.5, 1.0);
 	}
 }
