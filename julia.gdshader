@@ -3,13 +3,14 @@ shader_type canvas_item;
 #define cx_mul(a, b) vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x)
 #define cx_div(a, b) vec2(((a.x*b.x+a.y*b.y)/(b.x*b.x+b.y*b.y)),((a.y*b.x-a.x*b.y)/(b.x*b.x+b.y*b.y)))
 
-#define LOOPS  18
+#define LOOPS 100
 
 
 void fragment() {
 	// Center and scale the mandelbrot set, and set the initial conditons for z = 0
-	vec2 c = UV * vec2(4) - vec2(2.5, 2.0);
-	vec2 z = vec2(0);
+	vec2 c = vec2(-0.70176, 0.3842);
+	vec2 z = UV * vec2(4) - vec2(2);
+	
 	
 	vec2 zp;
 	int esc;

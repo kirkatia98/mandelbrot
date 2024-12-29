@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=5 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="Shader" path="res://mandlebrot.gdshader" id="1_ha4hf"]
+[ext_resource type="Shader" path="res://julia.gdshader" id="2_on53s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s0txa"]
 shader = ExtResource("1_ha4hf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3eno0"]
+shader = ExtResource("2_on53s")
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -13,12 +17,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="Mandlebrot Set" type="SubViewportContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.2
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.3
 anchor_bottom = 0.5
 offset_left = -256.0
 offset_top = -256.0
@@ -27,11 +31,40 @@ offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-size = Vector2i(1024, 1024)
+[node name="SubViewport" type="SubViewport" parent="Mandlebrot Set"]
+handle_input_locally = false
+size = Vector2i(1200, 1200)
+render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+[node name="ColorRect" type="ColorRect" parent="Mandlebrot Set/SubViewport"]
 material = SubResource("ShaderMaterial_s0txa")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Julia Set" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.5
+anchor_right = 0.75
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Julia Set"]
+handle_input_locally = false
+size = Vector2i(1200, 1200)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="Julia Set/SubViewport"]
+material = SubResource("ShaderMaterial_3eno0")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
