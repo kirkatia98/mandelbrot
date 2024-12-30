@@ -2,6 +2,10 @@
 #define cx_div(a, b) vec2(((a.x*b.x+a.y*b.y)/(b.x*b.x+b.y*b.y)),((a.y*b.x-a.x*b.y)/(b.x*b.x+b.y*b.y)))
 
 
+vec2 transform_uv(vec2 uv, vec2 offset, vec2 scale) {
+	return (uv * scale) - offset;
+}
+
 vec4 compute_point(vec2 z, vec2 c, int LOOPS) {
 	vec2 zp;
 	int esc;

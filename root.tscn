@@ -1,22 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="Shader" path="res://mandlebrot.gdshader" id="1_ha4hf"]
-[ext_resource type="Script" path="res://fractal.gd" id="1_lmb48"]
+[ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://julia.gdshader" id="2_on53s"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxm10"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhm26"]
 shader = ExtResource("1_ha4hf")
-shader_parameter/test = 1
-shader_parameter/zoom_center = Vector2(2.5, 2)
-shader_parameter/zoom_amount = Vector2(4, 4)
+shader_parameter/offset = Vector2(2, 2)
+shader_parameter/scale = Vector2(4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bxpv2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yleol"]
+resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
-shader_parameter/test = 1
-shader_parameter/zoom_center = Vector2(2, 2)
-shader_parameter/zoom_amount = Vector2(4, 4)
+shader_parameter/offset = Vector2(2, 2)
+shader_parameter/scale = Vector2(4, 4)
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -26,7 +24,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Mandlebrot Set" type="SubViewportContainer" parent="."]
+[node name="Mandlebrot" parent="." instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_fhm26")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -39,22 +38,9 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lmb48")
 
-[node name="SubViewport" type="SubViewport" parent="Mandlebrot Set"]
-handle_input_locally = false
-size = Vector2i(1200, 1200)
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="Mandlebrot Set/SubViewport"]
-material = SubResource("ShaderMaterial_uxm10")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Julia Set" type="SubViewportContainer" parent="."]
+[node name="Julia" parent="." instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_yleol")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
@@ -65,19 +51,5 @@ offset_left = -600.0
 offset_top = -600.0
 offset_right = 600.0
 offset_bottom = 600.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_lmb48")
-
-[node name="SubViewport" type="SubViewport" parent="Julia Set"]
-handle_input_locally = false
-size = Vector2i(1200, 1200)
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="Julia Set/SubViewport"]
-material = SubResource("ShaderMaterial_bxpv2")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2

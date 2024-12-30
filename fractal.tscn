@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctmsc8syid57c"]
+
+[ext_resource type="Script" path="res://fractal.gd" id="1_528h7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ifj"]
+resource_local_to_scene = true
+
+[node name="Fractal" type="ColorRect"]
+material = SubResource("ShaderMaterial_v8ifj")
+custom_minimum_size = Vector2(1200, 1200)
+offset_right = 1200.0
+offset_bottom = 1200.0
+script = ExtResource("1_528h7")
