@@ -2,17 +2,16 @@ shader_type canvas_item;
 
 #include "lib.gdshaderinc"
 
-#define LOOPS 100
+#define LOOPS 30
 
 // TODO: use a controller inside the mandlebrot shader to get a c value for the julia set
 uniform vec2 cursor;
 
-uniform vec2 offset;
-uniform vec2 scale;
-
+uniform vec2 rect_position;
+uniform vec2 rect_size;
 
 void fragment() {
-	vec2 uv = transform_uv(UV, offset, scale);
+	vec2 uv = transform_uv(UV, rect_position, rect_size);
 
 	// Center and scale the mandelbrot set, and set the initial conditons for z = 0
 	vec2 c = vec2(-0.70176, 0.3842);

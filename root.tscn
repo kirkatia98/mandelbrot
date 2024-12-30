@@ -6,15 +6,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhm26"]
 shader = ExtResource("1_ha4hf")
-shader_parameter/offset = Vector2(2, 2)
-shader_parameter/scale = Vector2(4, 4)
+shader_parameter/rect_position = Vector2(2, 2)
+shader_parameter/rect_size = Vector2(4, 4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yleol"]
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
-shader_parameter/offset = Vector2(2, 2)
-shader_parameter/scale = Vector2(4, 4)
+shader_parameter/rect_position = Vector2(2, 2)
+shader_parameter/rect_size = Vector2(4, 4)
 
 [node name="Root" type="Control"]
 layout_mode = 3
