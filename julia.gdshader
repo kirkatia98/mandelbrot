@@ -2,8 +2,6 @@ shader_type canvas_item;
 
 #include "lib.gdshaderinc"
 
-#define LOOPS 30
-
 // TODO: use a controller inside the mandlebrot shader to get a c value for the julia set
 uniform vec2 cursor;
 
@@ -19,7 +17,7 @@ void fragment() {
 	vec2 c = vec2(-0.70176, 0.3842);
 	vec2 z = uv;
 
-	COLOR = compute_point(z, c, LOOPS);
+	COLOR = compute_point(z, c);
 	
 	if(debug){
 		COLOR = debug_lines(uv, COLOR);

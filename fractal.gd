@@ -7,7 +7,8 @@ class_name Fractal extends ColorRect
 		(material as ShaderMaterial).set_shader_parameter("debug", debug)
 
 @export var pan_speed : float = 0.1
-@export var zoom_speed : float = 0.1
+@export var zoom_speed : float = 0.9
+@export var margin : int = 25
 
 @export var rect_position : Vector2 = Vector2(-2, -2):
 	set(val):
@@ -31,13 +32,19 @@ class_name Fractal extends ColorRect
 @export var BL : Label
 
 
-func update_coords():
-	var fmt_str = "(%.2f, %-.2f)"
+@onready var dragging : bool = false
 
-	var x1 = rect_position.x
-	var x2 = rect_position.x + rect_size.x
-	var y1 = rect_position.y
-	var y2 = rect_position.y + rect_size.y
+@onready var old_pos : Vector2
+@onready var old_mouse : Vector2
+
+
+func update_coords():
+	var fmt_str : String = "(%.3f, %-.3f)"
+
+	var x1: float = rect_position.x
+	var x2: float = rect_position.x + rect_size.x
+	var y1: float = rect_position.y
+	var y2: float = rect_position.y + rect_size.y
 
 	TL.text = fmt_str % [x1, y1]
 	TR.text = fmt_str % [x2, y1]
@@ -45,24 +52,56 @@ func update_coords():
 	BR.text = fmt_str % [x2, y2]
 
 
-# override gui input instead of input so that zoom input only accepted inside the borders
-func _gui_input(event):
-	var old_center = 0.5 * rect_size + rect_position
 
-	if event.is_action_pressed("zoom_in", true):
-		rect_size = rect_size * 0.9
+func _input(event):
+	var local_mouse = get_local_mouse_position()
+	var global_mouse = get_global_mouse_position()
+
+	var screen_rect = get_rect()
+
+	# shrink the actionable area by margin to prevent errant input
+	if(!screen_rect.grow(-margin).has_point(global_mouse)):
+		# not my event
+		dragging = false
+		return
+
+	var old_center: Vector2 = 0.5 * rect_size + rect_position
+
+	if event is InputEventMouseButton:
+		match(event.button_index):
+
+			# scroll events (set size)
+			MOUSE_BUTTON_WHEEL_UP:
+				rect_size = rect_size * zoom_speed
+			MOUSE_BUTTON_WHEEL_DOWN:
+				rect_size = rect_size / zoom_speed
+
+	if event is InputEventMouseButton:
+		match(event.button_index):
+
+			# scroll event, if dragging update a new drag start position
+			MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN:
+				rect_position = old_center - 0.5 * rect_size
+				if(dragging):
+					old_mouse = local_mouse
+					old_pos = rect_position
+
+			# start drag event
+			MOUSE_BUTTON_LEFT:
+				dragging = event.is_pressed()
+
+				# save the drag start position
+				if(dragging):
+					old_mouse = local_mouse
+					old_pos = rect_position
 
 
-	if event.is_action_pressed("zoom_out", true):
-		rect_size = rect_size / 0.9
+	if event is InputEventMouseMotion and dragging:
+		# drag event
+		# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
+		rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
 
-	rect_position = old_center - 0.5 * rect_size
 
-
-func _unhandled_input(_event):
+	# faster movement
 	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	rect_position -= 0.1 * rect_size * input_vector
-
-
-func _on_focus_entered():
-	print("focus")
+	rect_position -= pan_speed * rect_size * input_vector

@@ -1,6 +1,8 @@
 #define cx_mul(a, b) vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x)
 #define cx_div(a, b) vec2(((a.x*b.x+a.y*b.y)/(b.x*b.x+b.y*b.y)),((a.y*b.x-a.x*b.y)/(b.x*b.x+b.y*b.y)))
 
+#define LOOPS  50
+
 #define RED vec4(1, 0, 0, 1);
 #define GREEN vec4(0, 1, 0, 1);
 #define BLUE vec4(0, 0, 1, 1);
@@ -10,7 +12,7 @@ vec2 transform_uv(vec2 uv, vec2 rect_position, vec2 rect_size) {
 	return (uv * rect_size) + rect_position;
 }
 
-vec4 compute_point(vec2 z, vec2 c, int LOOPS) {
+vec4 compute_point(vec2 z, vec2 c) {
 	vec2 zp;
 	int esc;
 	

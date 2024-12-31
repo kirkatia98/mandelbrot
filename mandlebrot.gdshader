@@ -2,8 +2,6 @@ shader_type canvas_item;
 
 #include "lib.gdshaderinc"
 
-#define LOOPS  30
-
 uniform bool debug;
 
 uniform vec2 rect_position;
@@ -16,7 +14,7 @@ void fragment() {
 	vec2 c = uv;
 	vec2 z = vec2(0);
 	
-	COLOR = compute_point(z, c, LOOPS);
+	COLOR = compute_point(z, c);
 	
 	// If the debug flag is set, overwrite color with a debug function
 	if(debug){
