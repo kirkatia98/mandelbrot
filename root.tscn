@@ -6,6 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhm26"]
 shader = ExtResource("1_ha4hf")
+shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(2, 2)
 shader_parameter/rect_size = Vector2(4, 4)
 
@@ -13,6 +14,7 @@ shader_parameter/rect_size = Vector2(4, 4)
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
+shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(2, 2)
 shader_parameter/rect_size = Vector2(4, 4)
 

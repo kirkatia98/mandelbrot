@@ -4,6 +4,8 @@ shader_type canvas_item;
 
 #define LOOPS  30
 
+uniform bool debug;
+
 uniform vec2 rect_position;
 uniform vec2 rect_size;
 
@@ -15,4 +17,9 @@ void fragment() {
 	vec2 z = vec2(0);
 	
 	COLOR = compute_point(z, c, LOOPS);
+	
+	// If the debug flag is set, overwrite color with a debug function
+	if(debug){
+		COLOR = debug_lines(uv, COLOR);
+	}
 }

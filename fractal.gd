@@ -1,6 +1,11 @@
 @tool
 class_name Fractal extends ColorRect
 
+@export var debug : bool = false :
+	set(val):
+		debug = val
+		(material as ShaderMaterial).set_shader_parameter("debug", debug)
+
 
 @export var pan_speed : float = 0.1
 @export var zoom_speed : float = 0.1
