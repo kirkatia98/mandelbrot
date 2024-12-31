@@ -40,6 +40,7 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
+shader_material = SubResource("ShaderMaterial_fhm26")
 
 [node name="Julia" parent="." instance=ExtResource("2_45h1s")]
 material = SubResource("ShaderMaterial_yleol")
@@ -55,3 +56,4 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
+shader_material = SubResource("ShaderMaterial_yleol")

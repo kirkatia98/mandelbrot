@@ -5,9 +5,63 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ifj"]
 resource_local_to_scene = true
 
-[node name="Fractal" type="ColorRect"]
+[node name="Fractal" type="ColorRect" node_paths=PackedStringArray("labels", "TL", "TR", "BR", "BL")]
 material = SubResource("ShaderMaterial_v8ifj")
 custom_minimum_size = Vector2(1200, 1200)
 offset_right = 1200.0
 offset_bottom = 1200.0
+color = Color(0.44, 0.44, 0.44, 1)
 script = ExtResource("1_528h7")
+shader_material = SubResource("ShaderMaterial_v8ifj")
+labels = NodePath("Labels")
+TL = NodePath("Labels/TopLeft")
+TR = NodePath("Labels/TopRight")
+BR = NodePath("Labels/BottomRight")
+BL = NodePath("Labels/BottomLeft")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLeft" type="Label" parent="Labels"]
+layout_mode = 1
+offset_right = 18.0
+offset_bottom = 23.0
+text = "(2.00, 2.00)"
+
+[node name="TopRight" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "(6.00, 2.00)"
+
+[node name="BottomRight" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "(6.00, 6.00)"
+
+[node name="BottomLeft" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "(6.00, 6.00)"

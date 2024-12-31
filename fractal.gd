@@ -6,23 +6,43 @@ class_name Fractal extends ColorRect
 		debug = val
 		(material as ShaderMaterial).set_shader_parameter("debug", debug)
 
-
 @export var pan_speed : float = 0.1
 @export var zoom_speed : float = 0.1
-
 
 @export var rect_position : Vector2 = Vector2(2, 2):
 	set(val):
 		rect_position = val
-		(material as ShaderMaterial).set_shader_parameter("rect_position", rect_position)
+		shader_material.set_shader_parameter("rect_position", rect_position)
+		update_coords()
 
 
 @export var rect_size : Vector2 = Vector2(4, 4):
 	set(val):
 		rect_size = val
-		(material as ShaderMaterial).set_shader_parameter("rect_size", rect_size)
+		shader_material.set_shader_parameter("rect_size", rect_size)
+		update_coords()
 
-@onready var shader_material : ShaderMaterial = material as ShaderMaterial
+@export var shader_material : ShaderMaterial = material as ShaderMaterial
+
+@export var labels : Control
+@export var TL : Label
+@export var TR : Label
+@export var BR : Label
+@export var BL : Label
+
+
+func update_coords():
+	var fmt_str = "(%.2f, %-.2f)"
+
+	var x1 = rect_position.x
+	var x2 = rect_position.x + rect_size.x
+	var y1 = rect_position.y
+	var y2 = rect_position.y + rect_size.y
+
+	TL.text = fmt_str % [x1, y1]
+	TR.text = fmt_str % [x2, y1]
+	BL.text = fmt_str % [x2, y2]
+	BR.text = fmt_str % [x2, y2]
 
 
 # override gui input instead of input so that zoom input only accepted inside the borders
@@ -45,3 +65,7 @@ func _gui_input(event):
 func _unhandled_input(_event):
 	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	rect_position -= 0.1 * rect_size * input_vector
+
+
+func _on_focus_entered():
+	print("focus")
