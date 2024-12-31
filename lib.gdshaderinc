@@ -7,7 +7,7 @@
 
 
 vec2 transform_uv(vec2 uv, vec2 rect_position, vec2 rect_size) {
-	return (uv * rect_size) - rect_position;
+	return (uv * rect_size) + rect_position;
 }
 
 vec4 compute_point(vec2 z, vec2 c, int LOOPS) {

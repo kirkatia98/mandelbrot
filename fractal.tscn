@@ -31,7 +31,7 @@ grow_vertical = 2
 layout_mode = 1
 offset_right = 18.0
 offset_bottom = 23.0
-text = "(2.00, 2.00)"
+text = "(-2.00, -2.00)"
 
 [node name="TopRight" type="Label" parent="Labels"]
 layout_mode = 1
@@ -41,7 +41,7 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
-text = "(6.00, 2.00)"
+text = "(2.00, -2.00)"
 
 [node name="BottomRight" type="Label" parent="Labels"]
 layout_mode = 1
@@ -54,7 +54,7 @@ offset_left = -40.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "(6.00, 6.00)"
+text = "(2.00, 2.00)"
 
 [node name="BottomLeft" type="Label" parent="Labels"]
 layout_mode = 1
@@ -64,4 +64,4 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "(6.00, 6.00)"
+text = "(2.00, 2.00)"
