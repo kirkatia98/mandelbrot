@@ -14,7 +14,9 @@ void fragment() {
 	vec2 c = uv;
 	vec2 z = vec2(0);
 	
-	COLOR = compute_point(z, c);
+	int iterations = scale_iterations(rect_size);
+	
+	COLOR = compute_point(z, c, iterations);
 	
 	// If the debug flag is set, overwrite color with a debug function
 	if(debug){

@@ -17,7 +17,9 @@ void fragment() {
 	vec2 c = vec2(-0.70176, 0.3842);
 	vec2 z = uv;
 
-	COLOR = compute_point(z, c);
+	int iterations = scale_iterations(rect_size);
+	
+	COLOR = compute_point(z, c, iterations);
 	
 	if(debug){
 		COLOR = debug_lines(uv, COLOR);
