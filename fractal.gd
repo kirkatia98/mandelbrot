@@ -14,22 +14,29 @@ class_name Fractal extends ColorRect
 	set(val):
 		rect_position = val
 		shader_material.set_shader_parameter("rect_position", rect_position)
-		update_coords()
+		update_labels()
 
 
 @export var rect_size : Vector2 = Vector2(4, 4):
 	set(val):
 		rect_size = val
 		shader_material.set_shader_parameter("rect_size", rect_size)
-		update_coords()
+		update_labels()
 
 @export var shader_material : ShaderMaterial = material as ShaderMaterial
 
+@export_group("Boundary Coordinates")
 @export var labels : Control
 @export var TL : Label
 @export var TR : Label
 @export var BR : Label
 @export var BL : Label
+
+@export_group("Debug Hints")
+@export var RP : Label
+@export var RS : Label
+@export var MP : Label
+@export var ST : Label
 
 
 @onready var dragging : bool = false
@@ -38,19 +45,45 @@ class_name Fractal extends ColorRect
 @onready var old_mouse : Vector2
 
 
-func update_coords():
+func update_labels():
 	var fmt_str : String = "(%.3f, %-.3f)"
+	var fmt_str_long : String = "%.10f, %.10f"
 
 	var x1: float = rect_position.x
 	var x2: float = rect_position.x + rect_size.x
 	var y1: float = rect_position.y
 	var y2: float = rect_position.y + rect_size.y
 
+	# Set Boundary Coordinates
 	TL.text = fmt_str % [x1, y1]
 	TR.text = fmt_str % [x2, y1]
 	BL.text = fmt_str % [x2, y2]
 	BR.text = fmt_str % [x2, y2]
 
+
+	# Set Debug Hints
+	RP.text = "Rect Position:\n" + fmt_str_long % [rect_position.x, rect_position.y]
+	RS.text = "Rect Size\n" + fmt_str_long % [rect_size.x, rect_size.y]
+	ST.text = "Steps:\n%d" % scale_iterations()
+
+
+	var mp_text = "(_, _)"
+	if not Engine.is_editor_hint():
+
+		# if in the code, get the local mouse position and scale it to the display size
+		var local_mouse : Vector2 = get_local_mouse_position()
+		local_mouse /= get_rect().size
+		local_mouse *= rect_size
+		local_mouse += rect_position
+
+		mp_text = fmt_str_long % [local_mouse.x, local_mouse.y]
+
+	MP.text = "Mouse Position:\n" + mp_text
+
+
+
+func scale_iterations():
+	return int(50.0/pow(rect_size.length(), 0.4))
 
 
 func _input(event):

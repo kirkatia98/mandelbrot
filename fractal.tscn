@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ifj"]
 resource_local_to_scene = true
 
-[node name="Fractal" type="ColorRect" node_paths=PackedStringArray("labels", "TL", "TR", "BR", "BL")]
+[node name="Fractal" type="ColorRect" node_paths=PackedStringArray("labels", "TL", "TR", "BR", "BL", "RP", "RS", "MP", "ST")]
 material = SubResource("ShaderMaterial_v8ifj")
 custom_minimum_size = Vector2(1200, 1200)
 offset_right = 1200.0
@@ -13,27 +13,30 @@ offset_bottom = 1200.0
 color = Color(0.44, 0.44, 0.44, 1)
 script = ExtResource("1_528h7")
 shader_material = SubResource("ShaderMaterial_v8ifj")
-labels = NodePath("Labels")
-TL = NodePath("Labels/TopLeft")
-TR = NodePath("Labels/TopRight")
-BR = NodePath("Labels/BottomRight")
-BL = NodePath("Labels/BottomLeft")
+labels = NodePath("Boundary Coordinates")
+TL = NodePath("Boundary Coordinates/TopLeft")
+TR = NodePath("Boundary Coordinates/TopRight")
+BR = NodePath("Boundary Coordinates/BottomRight")
+BL = NodePath("Boundary Coordinates/BottomLeft")
+RP = NodePath("Debug Hints/Rect Position")
+RS = NodePath("Debug Hints/Rect Size")
+MP = NodePath("Debug Hints/Mouse Position")
+ST = NodePath("Debug Hints/Steps")
 
-[node name="Labels" type="Control" parent="."]
+[node name="Boundary Coordinates" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopLeft" type="Label" parent="Labels"]
+[node name="TopLeft" type="Label" parent="Boundary Coordinates"]
 layout_mode = 1
 offset_right = 18.0
 offset_bottom = 23.0
-text = "(0.00, 0.00)"
+text = "(-2.000, -2.000)"
 
-[node name="TopRight" type="Label" parent="Labels"]
+[node name="TopRight" type="Label" parent="Boundary Coordinates"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -41,9 +44,9 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
-text = "(0.00, 0.00)"
+text = "(2.000, -2.000)"
 
-[node name="BottomRight" type="Label" parent="Labels"]
+[node name="BottomRight" type="Label" parent="Boundary Coordinates"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -54,9 +57,9 @@ offset_left = -40.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "(0.00, 0.00)"
+text = "(2.000, 2.000)"
 
-[node name="BottomLeft" type="Label" parent="Labels"]
+[node name="BottomLeft" type="Label" parent="Boundary Coordinates"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -64,4 +67,32 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "(0.00, 0.00)"
+text = "(2.000, 2.000)"
+
+[node name="Debug Hints" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="Rect Position" type="Label" parent="Debug Hints"]
+layout_mode = 2
+text = "Rect Position:
+(-2.000000, -2.000000)"
+
+[node name="Rect Size" type="Label" parent="Debug Hints"]
+layout_mode = 2
+text = "Rect Size
+(4.000000,4.000000)"
+
+[node name="Mouse Position" type="Label" parent="Debug Hints"]
+layout_mode = 2
+
+[node name="Steps" type="Label" parent="Debug Hints"]
+layout_mode = 2
