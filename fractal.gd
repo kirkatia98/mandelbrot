@@ -10,12 +10,13 @@ class_name Fractal extends ColorRect
 @export var zoom_speed : float = 0.9
 @export var margin : int = 25
 
+
+@export_group("Shader Paramaters")
 @export var rect_position : Vector2 = Vector2(-2, -2):
 	set(val):
 		rect_position = val
 		shader_material.set_shader_parameter("rect_position", rect_position)
 		update_labels()
-
 
 @export var rect_size : Vector2 = Vector2(4, 4):
 	set(val):
@@ -23,7 +24,14 @@ class_name Fractal extends ColorRect
 		shader_material.set_shader_parameter("rect_size", rect_size)
 		update_labels()
 
+
 @export var shader_material : ShaderMaterial = material as ShaderMaterial
+
+@export var palette_image : Texture2D:
+	set(val):
+		palette_image = val
+		shader_material.set_shader_parameter("palette_image", val)
+
 
 @export_group("Boundary Coordinates")
 @export var labels : Control
@@ -71,15 +79,27 @@ func update_labels():
 	if not Engine.is_editor_hint():
 
 		# if in the code, get the local mouse position and scale it to the display size
-		var local_mouse : Vector2 = get_local_mouse_position()
-		local_mouse /= get_rect().size
-		local_mouse *= rect_size
-		local_mouse += rect_position
+		var local_mouse = get_local_mouse_position()
+		var global_mouse = get_global_mouse_position()
 
-		mp_text = fmt_str_long % [local_mouse.x, local_mouse.y]
+		if(get_rect().has_point(global_mouse)):
+			var mouse_position = local_to_shader(local_mouse)
+			mp_text = fmt_str_long % [mouse_position.x, mouse_position.y]
 
 	MP.text = "Mouse Position:\n" + mp_text
 
+
+# convert local coordinates to coordinates used in the shader
+func local_to_shader(local : Vector2):
+	local /= get_rect().size
+	local *= rect_size
+	local += rect_position
+
+	return local
+
+
+func compute_point():
+	pass
 
 
 func scale_iterations():

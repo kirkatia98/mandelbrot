@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=4 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="1_528h7"]
+[ext_resource type="Texture2D" uid="uid://d3toxvdmt2iaf" path="res://palettes/lava-gb-1x.png" id="2_v7l53"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ifj"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3on3b"]
 
 [node name="Fractal" type="ColorRect" node_paths=PackedStringArray("labels", "TL", "TR", "BR", "BL", "RP", "RS", "MP", "ST")]
-material = SubResource("ShaderMaterial_v8ifj")
 custom_minimum_size = Vector2(1200, 1200)
 offset_right = 1200.0
 offset_bottom = 1200.0
 color = Color(0.44, 0.44, 0.44, 1)
 script = ExtResource("1_528h7")
-shader_material = SubResource("ShaderMaterial_v8ifj")
+shader_material = SubResource("ShaderMaterial_3on3b")
+palette_image = ExtResource("2_v7l53")
 labels = NodePath("Boundary Coordinates")
 TL = NodePath("Boundary Coordinates/TopLeft")
 TR = NodePath("Boundary Coordinates/TopRight")
@@ -25,6 +25,7 @@ ST = NodePath("Debug Hints/Steps")
 
 [node name="Boundary Coordinates" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -84,15 +85,19 @@ theme_override_constants/separation = 50
 [node name="Rect Position" type="Label" parent="Debug Hints"]
 layout_mode = 2
 text = "Rect Position:
-(-2.000000, -2.000000)"
+-2.0000000000, -2.0000000000"
 
 [node name="Rect Size" type="Label" parent="Debug Hints"]
 layout_mode = 2
 text = "Rect Size
-(4.000000,4.000000)"
+4.0000000000, 4.0000000000"
 
 [node name="Mouse Position" type="Label" parent="Debug Hints"]
 layout_mode = 2
+text = "Mouse Position:
+(_, _)"
 
 [node name="Steps" type="Label" parent="Debug Hints"]
 layout_mode = 2
+text = "Steps:
+25"

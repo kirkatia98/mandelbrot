@@ -1,30 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
 
-[ext_resource type="Shader" path="res://mandlebrot.gdshader" id="1_ha4hf"]
+[ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="1_ha4hf"]
+[ext_resource type="Script" path="res://root.gd" id="1_nclbt"]
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
-[ext_resource type="Shader" path="res://julia.gdshader" id="2_on53s"]
+[ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
+[ext_resource type="Texture2D" uid="uid://d3toxvdmt2iaf" path="res://palettes/lava-gb-1x.png" id="2_qxbxc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhm26"]
 shader = ExtResource("1_ha4hf")
 shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = ExtResource("2_qxbxc")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yleol"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yocy"]
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
 shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = ExtResource("2_qxbxc")
 
-[node name="Root" type="Control"]
+[node name="Root" type="Control" node_paths=PackedStringArray("Mandlebrot", "Julia")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nclbt")
+Mandlebrot = NodePath("Mandlebrot")
+Julia = NodePath("Julia")
+palette_image = ExtResource("2_qxbxc")
 
 [node name="Mandlebrot" parent="." instance=ExtResource("2_45h1s")]
 material = SubResource("ShaderMaterial_fhm26")
@@ -43,7 +51,7 @@ grow_vertical = 2
 shader_material = SubResource("ShaderMaterial_fhm26")
 
 [node name="Julia" parent="." instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_yleol")
+material = SubResource("ShaderMaterial_0yocy")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
@@ -56,4 +64,4 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
-shader_material = SubResource("ShaderMaterial_yleol")
+shader_material = SubResource("ShaderMaterial_0yocy")
