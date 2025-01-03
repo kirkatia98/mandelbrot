@@ -105,6 +105,17 @@ func scale_iterations():
 	return int(50.0/pow(rect_size.length(), 0.4))
 
 
+func save_png():
+	var viewport : Viewport = get_viewport()
+	var texture: Texture2D = viewport.get_texture()
+	var image : Image = texture.get_image()
+
+	var res = image.save_png("res://image.png")
+	print(image)
+	print(res)
+
+
+# drag and zoom input using a mouse
 func _input(event):
 	var local_mouse = get_local_mouse_position()
 	var global_mouse = get_global_mouse_position()
@@ -157,3 +168,7 @@ func _input(event):
 	# faster movement
 	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	rect_position -= pan_speed * rect_size * input_vector
+
+
+func _on_button_pressed():
+	pass # Replace with function body.

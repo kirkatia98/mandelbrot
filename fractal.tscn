@@ -102,5 +102,11 @@ layout_mode = 2
 text = "Steps:
 25"
 
-[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+[node name="ResourcePreloader" type="ResourcePreloader" parent="Debug Hints"]
 resources = [PackedStringArray("sample", "shader"), [ExtResource("4_lsovt"), ExtResource("2_mqpwo")]]
+
+[node name="Button" type="Button" parent="Debug Hints"]
+layout_mode = 2
+text = "Screen Shot"
+
+[connection signal="pressed" from="Debug Hints/Button" to="." method="save_png"]
