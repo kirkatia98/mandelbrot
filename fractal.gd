@@ -115,9 +115,10 @@ func save_png():
 	var texture: Texture2D = viewport.get_texture()
 	var image : Image = texture.get_image()
 
-	var res = image.save_png("res://image.png")
-	print(image)
-	print(res)
+	var time : Dictionary = Time.get_datetime_dict_from_system()
+	var img_name = "res://%s/%s_%d.%d_%d.%d.png" % ["demo_files", name, time["month"], time["day"], time["hour"], time["minute"] ]
+
+	return image.save_png(img_name)
 
 
 # drag and zoom input using a mouse

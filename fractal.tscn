@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=5 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="1_528h7"]
 [ext_resource type="Material" uid="uid://3uw8qk1x64iy" path="res://shader_code/shader.tres" id="2_mqpwo"]
+[ext_resource type="Texture2D" uid="uid://uvuajd2ecq45" path="res://palettes/twilight-5-1x.png" id="3_qgs41"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="4_lsovt"]
 
 [node name="Fractal" type="Control" node_paths=PackedStringArray("subviewport", "color_rect", "TL", "TR", "BR", "BL", "RP", "RS", "MP", "ST")]
@@ -14,6 +15,7 @@ script = ExtResource("1_528h7")
 subviewport = NodePath("VBoxContainer/MarginContainer/SubViewportContainer/SubViewport")
 color_rect = NodePath("VBoxContainer/MarginContainer/SubViewportContainer/SubViewport/ColorRect")
 shader_material = ExtResource("2_mqpwo")
+palette_image = ExtResource("3_qgs41")
 TL = NodePath("VBoxContainer/MarginContainer/Boundary Coordinates/TopLeft")
 TR = NodePath("VBoxContainer/MarginContainer/Boundary Coordinates/TopRight")
 BR = NodePath("VBoxContainer/MarginContainer/Boundary Coordinates/BottomRight")
