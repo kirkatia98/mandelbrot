@@ -1,26 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=11 format=3 uid="uid://daft7bxk2ijia"]
 
-[ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="1_ha4hf"]
-[ext_resource type="Script" path="res://root.gd" id="1_nclbt"]
+[ext_resource type="Script" path="res://root.gd" id="1_wsftv"]
+[ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="2_03xxk"]
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
+[ext_resource type="Texture2D" uid="uid://uvuajd2ecq45" path="res://palettes/twilight-5-1x.png" id="2_nhrhf"]
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
-[ext_resource type="Texture2D" uid="uid://d3toxvdmt2iaf" path="res://palettes/lava-gb-1x.png" id="2_qxbxc"]
+[ext_resource type="ShaderInclude" path="res://shader_code/lib.gdshaderinc" id="6_wh37j"]
+[ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="7_ivmpv"]
+[ext_resource type="Material" uid="uid://3uw8qk1x64iy" path="res://shader_code/shader.tres" id="8_r5ohi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhm26"]
-shader = ExtResource("1_ha4hf")
-shader_parameter/debug = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3e100"]
+resource_local_to_scene = true
+shader = ExtResource("7_ivmpv")
+shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("2_qxbxc")
+shader_parameter/palette_image = ExtResource("2_nhrhf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yocy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqy0j"]
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
 shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("2_qxbxc")
+shader_parameter/palette_image = ExtResource("2_nhrhf")
 
 [node name="Root" type="Control" node_paths=PackedStringArray("Mandlebrot", "Julia")]
 layout_mode = 3
@@ -29,13 +33,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nclbt")
+script = ExtResource("1_wsftv")
 Mandlebrot = NodePath("Mandlebrot")
 Julia = NodePath("Julia")
-palette_image = ExtResource("2_qxbxc")
+palette_image = ExtResource("2_nhrhf")
 
 [node name="Mandlebrot" parent="." instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_fhm26")
+material = SubResource("ShaderMaterial_3e100")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -48,10 +52,11 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
-shader_material = SubResource("ShaderMaterial_fhm26")
+shader_material = SubResource("ShaderMaterial_3e100")
+palette_image = ExtResource("2_nhrhf")
 
 [node name="Julia" parent="." instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_0yocy")
+material = SubResource("ShaderMaterial_aqy0j")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
@@ -64,4 +69,8 @@ offset_right = 600.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
-shader_material = SubResource("ShaderMaterial_0yocy")
+shader_material = SubResource("ShaderMaterial_aqy0j")
+palette_image = ExtResource("2_nhrhf")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("julia", "lib", "mandlebrot", "sample", "shader"), [ExtResource("2_on53s"), ExtResource("6_wh37j"), ExtResource("7_ivmpv"), ExtResource("2_03xxk"), ExtResource("8_r5ohi")]]

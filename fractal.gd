@@ -34,7 +34,6 @@ class_name Fractal extends ColorRect
 
 
 @export_group("Boundary Coordinates")
-@export var labels : Control
 @export var TL : Label
 @export var TR : Label
 @export var BR : Label
