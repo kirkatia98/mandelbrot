@@ -1,14 +1,17 @@
 @tool
-class_name Fractal extends ColorRect
-
-@export var debug : bool = false :
-	set(val):
-		debug = val
-		(material as ShaderMaterial).set_shader_parameter("debug", debug)
+class_name Fractal extends Control
 
 @export var pan_speed : float = 0.1
-@export var zoom_speed : float = 0.9
+@export var zoom_speed : float = 0.95
 @export var margin : int = 25
+
+@export var subviewport : SubViewport
+
+@export var color_rect : ColorRect
+
+@export var shader_material : ShaderMaterial:
+	set(val):
+		shader_material = val
 
 
 @export_group("Shader Paramaters")
@@ -24,13 +27,15 @@ class_name Fractal extends ColorRect
 		shader_material.set_shader_parameter("rect_size", rect_size)
 		update_labels()
 
-
-@export var shader_material : ShaderMaterial = material as ShaderMaterial
-
 @export var palette_image : Texture2D:
 	set(val):
 		palette_image = val
 		shader_material.set_shader_parameter("palette_image", val)
+
+@export var debug : bool = false :
+	set(val):
+		debug = val
+		(material as ShaderMaterial).set_shader_parameter("debug", debug)
 
 
 @export_group("Boundary Coordinates")
@@ -78,10 +83,10 @@ func update_labels():
 	if not Engine.is_editor_hint():
 
 		# if in the code, get the local mouse position and scale it to the display size
-		var local_mouse = get_local_mouse_position()
-		var global_mouse = get_global_mouse_position()
+		var local_mouse = color_rect.get_local_mouse_position()
+		var global_mouse = color_rect.get_global_mouse_position()
 
-		if(get_rect().has_point(global_mouse)):
+		if(color_rect.get_rect().has_point(global_mouse)):
 			var mouse_position = local_to_shader(local_mouse)
 			mp_text = fmt_str_long % [mouse_position.x, mouse_position.y]
 
@@ -90,7 +95,7 @@ func update_labels():
 
 # convert local coordinates to coordinates used in the shader
 func local_to_shader(local : Vector2):
-	local /= get_rect().size
+	local /= color_rect.get_rect().size
 	local *= rect_size
 	local += rect_position
 
@@ -106,7 +111,7 @@ func scale_iterations():
 
 
 func save_png():
-	var viewport : Viewport = get_viewport()
+	var viewport : Viewport = subviewport.get_viewport()
 	var texture: Texture2D = viewport.get_texture()
 	var image : Image = texture.get_image()
 
@@ -117,10 +122,10 @@ func save_png():
 
 # drag and zoom input using a mouse
 func _input(event):
-	var local_mouse = get_local_mouse_position()
-	var global_mouse = get_global_mouse_position()
+	var local_mouse = color_rect.get_local_mouse_position()
+	var global_mouse = color_rect.get_global_mouse_position()
 
-	var screen_rect = get_rect()
+	var screen_rect = color_rect.get_rect()
 
 	# shrink the actionable area by margin to prevent errant input
 	if(!screen_rect.grow(-margin).has_point(global_mouse)):
