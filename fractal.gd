@@ -9,9 +9,7 @@ class_name Fractal extends Control
 
 @export var color_rect : ColorRect
 
-@export var shader_material : ShaderMaterial:
-	set(val):
-		shader_material = val
+@export var shader_material : ShaderMaterial
 
 
 @export_group("Shader Paramaters")
@@ -48,7 +46,8 @@ class_name Fractal extends Control
 @export var RP : Label
 @export var RS : Label
 @export var MP : Label
-@export var ST : Label
+@export var ES : Label
+@export var MS : Label
 
 
 @onready var dragging : bool = false
@@ -76,7 +75,9 @@ func update_labels():
 	# Set Debug Hints
 	RP.text = "Rect Position:\n" + fmt_str_long % [rect_position.x, rect_position.y]
 	RS.text = "Rect Size\n" + fmt_str_long % [rect_size.x, rect_size.y]
-	ST.text = "Steps:\n%d" % scale_iterations()
+	ES.text = "Steps:\n_"
+	MS.text = "Steps:\n%d" % scale_iterations()
+
 
 
 	var mp_text = "(_, _)"

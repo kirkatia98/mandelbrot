@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://root.gd" id="1_wsftv"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="2_03xxk"]
-[ext_resource type="Texture2D" uid="uid://cg4qbdx6pbliv" path="res://palettes/midnight-ablaze-1x.png" id="2_8tb86"]
+[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palettes/midnight-ablaze-1x.png" id="2_8tb86"]
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
 [ext_resource type="ShaderInclude" path="res://shader_code/lib.gdshaderinc" id="6_wh37j"]
@@ -26,7 +26,7 @@ shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = ExtResource("2_8tb86")
 
-[node name="Root" type="Control" node_paths=PackedStringArray("Mandlebrot", "Julia")]
+[node name="Root" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,37 +34,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wsftv")
-Mandlebrot = NodePath("Mandlebrot")
-Julia = NodePath("Julia")
-palette_image = ExtResource("2_8tb86")
-
-[node name="Mandlebrot" parent="." instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_3e100")
-layout_mode = 1
-anchor_left = 0.25
-anchor_top = 0.5
-anchor_right = 0.25
-anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -600.0
-offset_right = 600.0
-offset_bottom = 600.0
-shader_material = SubResource("ShaderMaterial_3e100")
-palette_image = ExtResource("2_8tb86")
-
-[node name="Julia" parent="." instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_aqy0j")
-layout_mode = 1
-anchor_left = 0.75
-anchor_top = 0.5
-anchor_right = 0.75
-anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -600.0
-offset_right = 600.0
-offset_bottom = 600.0
-shader_material = SubResource("ShaderMaterial_aqy0j")
 palette_image = ExtResource("2_8tb86")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("julia", "lib", "mandlebrot", "sample", "shader"), [ExtResource("2_on53s"), ExtResource("6_wh37j"), ExtResource("7_ivmpv"), ExtResource("2_03xxk"), ExtResource("8_r5ohi")]]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mandlebrot" parent="HBoxContainer" instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_3e100")
+layout_mode = 2
+size_flags_horizontal = 3
+shader_material = SubResource("ShaderMaterial_3e100")
+
+[node name="Julia" parent="HBoxContainer" instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_aqy0j")
+layout_mode = 2
+size_flags_horizontal = 3
+shader_material = SubResource("ShaderMaterial_aqy0j")
