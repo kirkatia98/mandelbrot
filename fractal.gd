@@ -8,6 +8,8 @@ signal update_labels
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
 
+@export var subviewport : SubViewportContainer
+
 @export var shader_material : ShaderMaterial :
 	set(val):
 		shader_material = val
@@ -43,10 +45,12 @@ signal update_labels
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
 
+func get_screen_rect():
+	return subviewport.get_rect()
 
 # convert local coordinates to coordinates used in the shader
 func local_to_shader(local : Vector2):
-	local /= get_rect().size
+	local /= get_screen_rect().size
 	local *= rect_size
 	local += rect_position
 
@@ -64,7 +68,7 @@ func compute_point():
 # drag and zoom input using a mouse
 func _input(event):
 	var local_mouse = get_local_mouse_position()
-	var screen_rect = get_rect()
+	var screen_rect = get_screen_rect()
 
 	# shrink the actionable area by margin to prevent errant input
 	if(!screen_rect.grow(-margin).has_point(local_mouse)):
@@ -73,6 +77,7 @@ func _input(event):
 		dragging = false
 		update_labels.emit()
 		return
+
 
 	var old_center: Vector2 = 0.5 * rect_size + rect_position
 

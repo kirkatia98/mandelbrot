@@ -11,7 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0p81i"]
 resource_local_to_scene = true
 
-[node name="Fractal" type="Control"]
+[node name="Fractal" type="Control" node_paths=PackedStringArray("subviewport")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("2_cw1qa")
+subviewport = NodePath("SubViewportContainer")
 shader_material = ExtResource("2_mqpwo")
 palette_image = ExtResource("3_4js3f")
 
@@ -27,6 +28,7 @@ palette_image = ExtResource("3_4js3f")
 resources = [PackedStringArray("sample", "shader"), [ExtResource("4_lsovt"), SubResource("ShaderMaterial_0p81i")]]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +46,6 @@ script = ExtResource("4_173sy")
 
 [node name="Screen" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 material = ExtResource("2_mqpwo")
-custom_minimum_size = Vector2(100, 100)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -53,6 +54,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 13
 
 [node name="Boundary Coordinates" type="MarginContainer" parent="." node_paths=PackedStringArray("f", "TL", "TR", "BR", "BL")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,7 +129,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 50.0
-offset_bottom = 75.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_top = 10

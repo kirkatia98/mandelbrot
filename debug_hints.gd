@@ -27,11 +27,10 @@ func _on_fractal_update_labels():
 
 		# if in the code, get the local mouse position and scale it to the display size
 		var local_mouse = f.get_local_mouse_position()
-		var global_mouse = f.get_global_mouse_position()
 
-		var screen_rect = f.get_rect()
+		var screen_rect = f.get_screen_rect()
 
-		if(screen_rect.has_point(global_mouse)):
+		if(screen_rect.has_point(local_mouse)):
 			var mouse_position = f.local_to_shader(local_mouse)
 			mp_text = fmt_str % [mouse_position.x, mouse_position.y]
 
