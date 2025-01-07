@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends MarginContainer
 
 @export var f : Fractal
 

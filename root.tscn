@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=11 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_wsftv"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="2_03xxk"]
@@ -11,7 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0p81i"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmdgp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84hul"]
 resource_local_to_scene = true
 shader = ExtResource("7_ivmpv")
 shader_parameter/debug = null
@@ -19,24 +19,7 @@ shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = ExtResource("2_8tb86")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr8dw"]
-resource_local_to_scene = true
-shader = ExtResource("7_ivmpv")
-shader_parameter/debug = null
-shader_parameter/rect_position = Vector2(-2, -2)
-shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("2_8tb86")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmk7k"]
-resource_local_to_scene = true
-shader = ExtResource("2_on53s")
-shader_parameter/cursor = null
-shader_parameter/debug = false
-shader_parameter/rect_position = Vector2(-2, -2)
-shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("2_8tb86")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwf12"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ke88p"]
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
@@ -53,8 +36,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wsftv")
-Mandlebrot = NodePath("HBoxContainer/Mandlebrot")
-Julia = NodePath("HBoxContainer/Julia")
+Mandlebrot = NodePath("HBoxContainer/Mandlebrot/Fractal")
+Julia = NodePath("HBoxContainer/Julia/Fractal")
 palette_image = ExtResource("2_8tb86")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -68,18 +51,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Mandlebrot" parent="HBoxContainer" node_paths=PackedStringArray("color_rect") instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_kmdgp")
+[node name="Mandlebrot" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-color_rect = NodePath("MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport/Color Rect")
-shader_material = SubResource("ShaderMaterial_xr8dw")
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 99
+
+[node name="Fractal" parent="HBoxContainer/Mandlebrot" instance=ExtResource("2_45h1s")]
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_84hul")
 palette_image = ExtResource("2_8tb86")
 
-[node name="Julia" parent="HBoxContainer" node_paths=PackedStringArray("color_rect") instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_wmk7k")
+[node name="Julia" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-color_rect = NodePath("MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport/Color Rect")
-shader_material = SubResource("ShaderMaterial_jwf12")
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 99
+
+[node name="Fractal" parent="HBoxContainer/Julia" instance=ExtResource("2_45h1s")]
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_ke88p")
 palette_image = ExtResource("2_8tb86")

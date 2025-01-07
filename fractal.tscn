@@ -10,53 +10,37 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0p81i"]
 resource_local_to_scene = true
 
-[node name="Fractal" type="Control" node_paths=PackedStringArray("color_rect")]
+[node name="Fractal" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 script = ExtResource("2_cw1qa")
-color_rect = NodePath("MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport/Color Rect")
 shader_material = ExtResource("2_mqpwo")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("sample", "shader"), [ExtResource("4_lsovt"), SubResource("ShaderMaterial_0p81i")]]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="Screen" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Screen"]
-layout_mode = 2
 mouse_filter = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Screen/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2480, 1203)
+size = Vector2i(2560, 1377)
 render_target_update_mode = 4
 script = ExtResource("4_173sy")
 
-[node name="Color Rect" type="ColorRect" parent="MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport"]
-unique_name_in_owner = true
+[node name="Screen" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 material = ExtResource("2_mqpwo")
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 15
@@ -66,66 +50,99 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 13
 
-[node name="Boundary Coordinates" type="Control" parent="MarginContainer/VBoxContainer/Screen" node_paths=PackedStringArray("f", "TL", "TR", "BR", "BL")]
-layout_mode = 2
-script = ExtResource("6_wgcb1")
-f = NodePath("../../../..")
-TL = NodePath("TopLeft")
-TR = NodePath("TopRight")
-BR = NodePath("BottomRight")
-BL = NodePath("BottomLeft")
-
-[node name="TopLeft" type="Label" parent="MarginContainer/VBoxContainer/Screen/Boundary Coordinates"]
+[node name="Boundary Coordinates" type="MarginContainer" parent="." node_paths=PackedStringArray("f", "TL", "TR", "BR", "BL")]
 layout_mode = 1
-offset_right = 18.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("6_wgcb1")
+f = NodePath("..")
+TL = NodePath("Control/TopLeft")
+TR = NodePath("Control/TopRight")
+BR = NodePath("Control/BottomRight")
+BL = NodePath("Control/BottomLeft")
+
+[node name="Control" type="Control" parent="Boundary Coordinates"]
+layout_mode = 2
+
+[node name="TopLeft" type="Label" parent="Boundary Coordinates/Control"]
+layout_mode = 1
+offset_right = 111.0
 offset_bottom = 23.0
 text = "(-2.000, -2.000)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TopRight" type="Label" parent="MarginContainer/VBoxContainer/Screen/Boundary Coordinates"]
+[node name="TopRight" type="Label" parent="Boundary Coordinates/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
+offset_left = -106.0
 offset_bottom = 23.0
 grow_horizontal = 0
 text = "(2.000, -2.000)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BottomRight" type="Label" parent="MarginContainer/VBoxContainer/Screen/Boundary Coordinates"]
+[node name="BottomRight" type="Label" parent="Boundary Coordinates/Control"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
+offset_left = -101.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "(2.000, 2.000)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BottomLeft" type="Label" parent="MarginContainer/VBoxContainer/Screen/Boundary Coordinates"]
+[node name="BottomLeft" type="Label" parent="Boundary Coordinates/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -23.0
-offset_right = 40.0
+offset_right = 101.0
 grow_vertical = 0
 text = "(2.000, 2.000)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Debug Hints" type="HBoxContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("f", "RP", "RS", "MP", "ES", "MS")]
+[node name="Debug Hints" type="MarginContainer" parent="." node_paths=PackedStringArray("f", "RP", "RS", "MP", "ES", "MS")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("7_hf5sh")
+f = NodePath("..")
+RP = NodePath("HBoxContainer/Rect Position")
+RS = NodePath("HBoxContainer/Rect Size")
+MP = NodePath("HBoxContainer/Mouse Position")
+ES = NodePath("HBoxContainer/Escape Steps")
+MS = NodePath("HBoxContainer/Max Steps")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Debug Hints"]
 layout_mode = 2
 theme_override_constants/separation = 50
-script = ExtResource("7_hf5sh")
-f = NodePath("../../..")
-RP = NodePath("Rect Position")
-RS = NodePath("Rect Size")
-MP = NodePath("Mouse Position")
-ES = NodePath("Escape Steps")
-MS = NodePath("Max Steps")
 
-[node name="Rect Position" type="Label" parent="MarginContainer/VBoxContainer/Debug Hints"]
+[node name="Rect Position" type="Label" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -133,7 +150,7 @@ text = "Rect Position:
 -2.0000000000, -2.0000000000"
 horizontal_alignment = 1
 
-[node name="Rect Size" type="Label" parent="MarginContainer/VBoxContainer/Debug Hints"]
+[node name="Rect Size" type="Label" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -141,7 +158,7 @@ text = "Rect Size
 4.0000000000, 4.0000000000"
 horizontal_alignment = 1
 
-[node name="Mouse Position" type="Label" parent="MarginContainer/VBoxContainer/Debug Hints"]
+[node name="Mouse Position" type="Label" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -149,7 +166,15 @@ text = "Mouse Position:
 (_, _)"
 horizontal_alignment = 1
 
-[node name="Escape Steps" type="Label" parent="MarginContainer/VBoxContainer/Debug Hints"]
+[node name="Escape Steps" type="Label" parent="Debug Hints/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Steps:
+_"
+horizontal_alignment = 1
+
+[node name="Max Steps" type="Label" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -157,19 +182,11 @@ text = "Steps:
 25"
 horizontal_alignment = 1
 
-[node name="Max Steps" type="Label" parent="MarginContainer/VBoxContainer/Debug Hints"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "Steps:
-25"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/Debug Hints"]
+[node name="Button" type="Button" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Screen Shot"
 
-[connection signal="update_labels" from="." to="MarginContainer/VBoxContainer/Screen/Boundary Coordinates" method="update_labels"]
-[connection signal="update_labels" from="." to="MarginContainer/VBoxContainer/Debug Hints" method="update_labels"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Debug Hints/Button" to="MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport" method="save_png"]
+[connection signal="update_labels" from="." to="Boundary Coordinates" method="update_labels"]
+[connection signal="update_labels" from="." to="Debug Hints" method="update_labels"]
+[connection signal="pressed" from="Debug Hints/HBoxContainer/Button" to="SubViewportContainer/SubViewport" method="save_png"]

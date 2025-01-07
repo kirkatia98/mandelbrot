@@ -1,10 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://3uw8qk1x64iy"]
 
-[ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="1_wtv0t"]
+[ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="1_f3dl6"]
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource("1_wtv0t")
-shader_parameter/debug = null
-shader_parameter/rect_position = Vector2(-2, -1.62)
+shader = ExtResource("1_f3dl6")
+shader_parameter/cursor = null
+shader_parameter/debug = false
+shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)

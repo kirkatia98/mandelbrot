@@ -1,5 +1,5 @@
 @tool
-extends HBoxContainer
+extends MarginContainer
 
 @export var f : Fractal
 
@@ -26,10 +26,10 @@ func update_labels():
 	if not Engine.is_editor_hint():
 
 		# if in the code, get the local mouse position and scale it to the display size
-		var local_mouse = f.color_rect.get_local_mouse_position()
-		var global_mouse = f.color_rect.get_global_mouse_position()
+		var local_mouse = f.get_local_mouse_position()
+		var global_mouse = f.get_global_mouse_position()
 
-		var screen_rect = f.color_rect.get_rect()
+		var screen_rect = f.get_rect()
 
 		if(screen_rect.has_point(global_mouse)):
 			var mouse_position = f.local_to_shader(local_mouse)

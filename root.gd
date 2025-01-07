@@ -5,7 +5,7 @@ extends Control
 @export var Mandlebrot : Fractal
 @export var Julia : Fractal
 
-@export var palette_image : Texture2D:
+@export var palette_image : CompressedTexture2D:
 	set(val):
 		palette_image = val
 
