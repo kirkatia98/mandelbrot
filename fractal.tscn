@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=9 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="2_cw1qa"]
 [ext_resource type="Material" uid="uid://3uw8qk1x64iy" path="res://shader_code/shader.tres" id="2_mqpwo"]
+[ext_resource type="Texture2D" uid="uid://vb2r80ipdoe5" path="res://palettes/twilight-5-1x.png" id="3_4js3f"]
 [ext_resource type="Script" path="res://viewport.gd" id="4_173sy"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="4_lsovt"]
 [ext_resource type="Script" path="res://boundary_coordinates.gd" id="6_wgcb1"]
@@ -20,6 +21,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("2_cw1qa")
 shader_material = ExtResource("2_mqpwo")
+palette_image = ExtResource("3_4js3f")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("sample", "shader"), [ExtResource("4_lsovt"), SubResource("ShaderMaterial_0p81i")]]
@@ -187,6 +189,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Screen Shot"
 
-[connection signal="update_labels" from="." to="Boundary Coordinates" method="update_labels"]
-[connection signal="update_labels" from="." to="Debug Hints" method="update_labels"]
+[connection signal="update_labels" from="." to="Boundary Coordinates" method="_on_fractal_update_labels"]
+[connection signal="update_labels" from="." to="Debug Hints" method="_on_fractal_update_labels"]
 [connection signal="pressed" from="Debug Hints/HBoxContainer/Button" to="SubViewportContainer/SubViewport" method="save_png"]

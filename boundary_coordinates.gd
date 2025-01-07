@@ -10,7 +10,7 @@ extends MarginContainer
 @export var BL : Label
 
 
-func update_labels():
+func _on_fractal_update_labels():
 	var fmt_str : String = "(%.3f, %-.3f)"
 
 	var x1: float = f.rect_position.x

@@ -1,6 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://3uw8qk1x64iy"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://3uw8qk1x64iy"]
 
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="1_f3dl6"]
+[ext_resource type="Texture2D" uid="uid://vb2r80ipdoe5" path="res://palettes/twilight-5-1x.png" id="2_drcic"]
 
 [resource]
 resource_local_to_scene = true
@@ -9,3 +10,4 @@ shader_parameter/cursor = null
 shader_parameter/debug = false
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = ExtResource("2_drcic")

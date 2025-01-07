@@ -11,7 +11,7 @@ extends MarginContainer
 @export var MS : Label
 
 
-func update_labels():
+func _on_fractal_update_labels():
 	var fmt_str : String = "%.10f, %.10f"
 
 	# Set Debug Hints
