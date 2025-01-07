@@ -1,15 +1,17 @@
 @tool
 class_name Fractal extends Control
 
+signal update_labels
+
+
 @export var pan_speed : float = 0.1
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
 
-@export var subviewport : SubViewport
-
 @export var color_rect : ColorRect
-
-@export var shader_material : ShaderMaterial
+@export var shader_material : ShaderMaterial :
+	set(val):
+		shader_material = val
 
 
 @export_group("Shader Paramaters")
@@ -17,81 +19,30 @@ class_name Fractal extends Control
 	set(val):
 		rect_position = val
 		shader_material.set_shader_parameter("rect_position", rect_position)
-		update_labels()
+		update_labels.emit()
+
 
 @export var rect_size : Vector2 = Vector2(4, 4):
 	set(val):
 		rect_size = val
 		shader_material.set_shader_parameter("rect_size", rect_size)
-		update_labels()
+		update_labels.emit()
+
 
 @export var palette_image : Texture2D:
 	set(val):
 		palette_image = val
 		shader_material.set_shader_parameter("palette_image", val)
 
+
 @export var debug : bool = false :
 	set(val):
 		debug = val
-		(material as ShaderMaterial).set_shader_parameter("debug", debug)
-
-
-@export_group("Boundary Coordinates")
-@export var TL : Label
-@export var TR : Label
-@export var BR : Label
-@export var BL : Label
-
-@export_group("Debug Hints")
-@export var RP : Label
-@export var RS : Label
-@export var MP : Label
-@export var ES : Label
-@export var MS : Label
-
+		shader_material.set_shader_parameter("debug", debug)
 
 @onready var dragging : bool = false
-
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
-
-
-func update_labels():
-	var fmt_str : String = "(%.3f, %-.3f)"
-	var fmt_str_long : String = "%.10f, %.10f"
-
-	var x1: float = rect_position.x
-	var x2: float = rect_position.x + rect_size.x
-	var y1: float = rect_position.y
-	var y2: float = rect_position.y + rect_size.y
-
-	# Set Boundary Coordinates
-	TL.text = fmt_str % [x1, y1]
-	TR.text = fmt_str % [x2, y1]
-	BL.text = fmt_str % [x2, y2]
-	BR.text = fmt_str % [x2, y2]
-
-
-	# Set Debug Hints
-	RP.text = "Rect Position:\n" + fmt_str_long % [rect_position.x, rect_position.y]
-	RS.text = "Rect Size\n" + fmt_str_long % [rect_size.x, rect_size.y]
-	ES.text = "Steps:\n_"
-	MS.text = "Steps:\n%d" % scale_iterations()
-
-
-
-	var mp_text = "(_, _)"
-	if not Engine.is_editor_hint():
-
-		# if in the code, get the local mouse position and scale it to the display size
-		var local_mouse = color_rect.get_local_mouse_position()
-		var global_mouse = color_rect.get_global_mouse_position()
-
-		if(color_rect.get_rect().has_point(global_mouse)):
-			var mouse_position = local_to_shader(local_mouse)
-			mp_text = fmt_str_long % [mouse_position.x, mouse_position.y]
-
-	MP.text = "Mouse Position:\n" + mp_text
 
 
 # convert local coordinates to coordinates used in the shader
@@ -103,23 +54,12 @@ func local_to_shader(local : Vector2):
 	return local
 
 
-func compute_point():
-	pass
-
-
 func scale_iterations():
 	return int(50.0/pow(rect_size.length(), 0.4))
 
 
-func save_png():
-	var viewport : Viewport = subviewport.get_viewport()
-	var texture: Texture2D = viewport.get_texture()
-	var image : Image = texture.get_image()
-
-	var time : Dictionary = Time.get_datetime_dict_from_system()
-	var img_name = "res://%s/%s_%d.%d_%d.%d.png" % ["demo_files", name, time["month"], time["day"], time["hour"], time["minute"] ]
-
-	return image.save_png(img_name)
+func compute_point():
+	pass
 
 
 # drag and zoom input using a mouse
@@ -129,10 +69,13 @@ func _input(event):
 
 	var screen_rect = color_rect.get_rect()
 
+
 	# shrink the actionable area by margin to prevent errant input
 	if(!screen_rect.grow(-margin).has_point(global_mouse)):
 		# not my event
+		# stop dragging
 		dragging = false
+		update_labels.emit()
 		return
 
 	var old_center: Vector2 = 0.5 * rect_size + rect_position
@@ -175,7 +118,3 @@ func _input(event):
 	# faster movement
 	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	rect_position -= pan_speed * rect_size * input_vector
-
-
-func _on_button_pressed():
-	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=13 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_wsftv"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="2_03xxk"]
@@ -7,9 +7,11 @@
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
 [ext_resource type="ShaderInclude" path="res://shader_code/lib.gdshaderinc" id="6_wh37j"]
 [ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="7_ivmpv"]
-[ext_resource type="Material" uid="uid://3uw8qk1x64iy" path="res://shader_code/shader.tres" id="8_r5ohi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3e100"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p81i"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmdgp"]
 resource_local_to_scene = true
 shader = ExtResource("7_ivmpv")
 shader_parameter/debug = null
@@ -17,7 +19,15 @@ shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = ExtResource("2_8tb86")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqy0j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr8dw"]
+resource_local_to_scene = true
+shader = ExtResource("7_ivmpv")
+shader_parameter/debug = null
+shader_parameter/rect_position = Vector2(-2, -2)
+shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = ExtResource("2_8tb86")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmk7k"]
 resource_local_to_scene = true
 shader = ExtResource("2_on53s")
 shader_parameter/cursor = null
@@ -26,7 +36,16 @@ shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = ExtResource("2_8tb86")
 
-[node name="Root" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwf12"]
+resource_local_to_scene = true
+shader = ExtResource("2_on53s")
+shader_parameter/cursor = null
+shader_parameter/debug = null
+shader_parameter/rect_position = Vector2(-2, -2)
+shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = ExtResource("2_8tb86")
+
+[node name="Root" type="Control" node_paths=PackedStringArray("Mandlebrot", "Julia")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,10 +53,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wsftv")
+Mandlebrot = NodePath("HBoxContainer/Mandlebrot")
+Julia = NodePath("HBoxContainer/Julia")
 palette_image = ExtResource("2_8tb86")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("julia", "lib", "mandlebrot", "sample", "shader"), [ExtResource("2_on53s"), ExtResource("6_wh37j"), ExtResource("7_ivmpv"), ExtResource("2_03xxk"), ExtResource("8_r5ohi")]]
+resources = [PackedStringArray("julia", "lib", "mandlebrot", "sample", "shader"), [ExtResource("2_on53s"), ExtResource("6_wh37j"), ExtResource("7_ivmpv"), ExtResource("2_03xxk"), SubResource("ShaderMaterial_0p81i")]]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -47,14 +68,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Mandlebrot" parent="HBoxContainer" instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_3e100")
+[node name="Mandlebrot" parent="HBoxContainer" node_paths=PackedStringArray("color_rect") instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_kmdgp")
 layout_mode = 2
 size_flags_horizontal = 3
-shader_material = SubResource("ShaderMaterial_3e100")
+color_rect = NodePath("MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport/Color Rect")
+shader_material = SubResource("ShaderMaterial_xr8dw")
+palette_image = ExtResource("2_8tb86")
 
-[node name="Julia" parent="HBoxContainer" instance=ExtResource("2_45h1s")]
-material = SubResource("ShaderMaterial_aqy0j")
+[node name="Julia" parent="HBoxContainer" node_paths=PackedStringArray("color_rect") instance=ExtResource("2_45h1s")]
+material = SubResource("ShaderMaterial_wmk7k")
 layout_mode = 2
 size_flags_horizontal = 3
-shader_material = SubResource("ShaderMaterial_aqy0j")
+color_rect = NodePath("MarginContainer/VBoxContainer/Screen/SubViewportContainer/SubViewport/Color Rect")
+shader_material = SubResource("ShaderMaterial_jwf12")
+palette_image = ExtResource("2_8tb86")
