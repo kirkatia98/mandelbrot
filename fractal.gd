@@ -2,17 +2,18 @@
 class_name Fractal extends Control
 
 signal update_labels
+signal update_shader
 
 
 @export var pan_speed : float = 0.1
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
 
-@export var subviewport : SubViewportContainer
-
-@export var shader_material : ShaderMaterial :
+@export var screen : ColorRect
+@export var shader_material : ShaderMaterial:
 	set(val):
 		shader_material = val
+		update_shader.emit()
 
 
 @export_group("Shader Paramaters")
@@ -46,7 +47,7 @@ signal update_labels
 @onready var old_mouse : Vector2
 
 func get_screen_rect():
-	return subviewport.get_rect()
+	return screen.get_rect()
 
 # convert local coordinates to coordinates used in the shader
 func local_to_shader(local : Vector2):

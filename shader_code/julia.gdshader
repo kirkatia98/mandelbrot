@@ -7,8 +7,8 @@ uniform vec2 cursor;
 
 uniform bool debug;
 
-uniform vec2 rect_position;
-uniform vec2 rect_size;
+uniform vec2 rect_position = vec2(-2);
+uniform vec2 rect_size = vec2(4);
 
 uniform sampler2D palette_image;
 
