@@ -9,17 +9,24 @@ extends EditorScript
 # Called when the script is executed (using File -> Run in Script Editor).
 func _run():
 	var manager : PaletteManager = update_resource()
-	update_code(manager)
+	var script : Script = update_script(manager)
+
+	ResourceSaver.save(manager, res_path)
+	ResourceSaver.save(script, script_path)
 
 
 func update_resource() -> PaletteManager:
 	# load palatte manager
 	var manager : PaletteManager = load(res_path)
 	manager.textures.clear()
+	manager.names.clear()
 
 	# Open the palette folder and begin scaning
 	var dir = DirAccess.open(folder)
 	dir.list_dir_begin()
+
+	manager.textures.append(null)
+	manager.names.append("EMPTY")
 
 	while true:
 
@@ -36,16 +43,14 @@ func update_resource() -> PaletteManager:
 		name = name.replace("-", "_")
 		name = name.to_upper()
 
-		manager.textures[name] = txt
+		manager.textures.append(txt)
+		manager.names.append(name)
 
 		# skip .import
 		dir.get_next()
 
-	# Save
-	manager.num = manager.textures.size()
 
-	# overwrite the old palette manager resource
-	var _err : Error = ResourceSaver.save(manager, res_path)
+	manager.num = manager.names.size()
 
 	return manager
 
@@ -56,17 +61,14 @@ class_name Palette extends RefCounted
 enum Enum {
 	EMPTY"""
 
-func update_code(manager : PaletteManager):
+func update_script(manager : PaletteManager):
 
 	var script : GDScript = GDScript.new()
 
-	for k : String in manager.textures.keys():
+	for k : String in manager.names.slice(1):
 		content += ",\n\t%s" % k
 
 	content += "\n}"
 
 	script.source_code = content
-
-	var _err : Error = ResourceSaver.save(script, script_path)
-
-	script.emit_changed()
+	return script

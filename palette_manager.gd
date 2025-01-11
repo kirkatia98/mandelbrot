@@ -1,13 +1,14 @@
-
+@tool
 class_name PaletteManager extends Resource
 
-@export var textures : Dictionary
+@export var textures : Array[Texture2D]
+@export var names : Array[String]
+
 @export var num : int
 
-const PALETTE = Palette.Enum
+static func test():
+	print("test")
 
+func get_palette(p : Palette.Enum ) -> Texture2D:
 
-func get_palette(p : PALETTE ) -> Texture2D:
-	var name : String = PALETTE.find_key(p)
-
-	return textures[name]
+	return textures[p]

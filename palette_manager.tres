@@ -15,17 +15,6 @@
 
 [resource]
 script = ExtResource("1_6xg6x")
-textures = {
-"AYY4": ExtResource("2_ppqfw"),
-"CMYK_DOUCE": ExtResource("3_n8j7o"),
-"EULBINK": ExtResource("4_d4c6h"),
-"LAVA_GB": ExtResource("5_34j56"),
-"MIDNIGHT_ABLAZE": ExtResource("6_4etty"),
-"MULBERRY": ExtResource("7_lgyjx"),
-"SLATE": ExtResource("8_p76i5"),
-"SLSO8": ExtResource("9_4rcqk"),
-"SWAMP_KIN": ExtResource("10_6gw0v"),
-"TWILIGHT_5": ExtResource("11_81meh"),
-"UT_UNDERNEATH": ExtResource("12_i2lbf")
-}
-num = 11
+textures = Array[Texture2D]([null, ExtResource("2_ppqfw"), ExtResource("3_n8j7o"), ExtResource("4_d4c6h"), ExtResource("5_34j56"), ExtResource("6_4etty"), ExtResource("7_lgyjx"), ExtResource("8_p76i5"), ExtResource("9_4rcqk"), ExtResource("10_6gw0v"), ExtResource("11_81meh"), ExtResource("12_i2lbf")])
+names = Array[String](["EMPTY", "AYY4", "CMYK_DOUCE", "EULBINK", "LAVA_GB", "MIDNIGHT_ABLAZE", "MULBERRY", "SLATE", "SLSO8", "SWAMP_KIN", "TWILIGHT_5", "UT_UNDERNEATH"])
+num = 12
