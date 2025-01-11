@@ -5,7 +5,7 @@ signal update_labels
 signal update_shader
 
 
-@export var pan_speed : float = 0.1
+@export var pan_speed : float = 0.05
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
 
@@ -46,8 +46,17 @@ signal update_shader
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
 
-func get_screen_rect():
+func get_screen_rect() -> Rect2:
 	return screen.get_rect()
+
+
+func mouse_on_screen() -> bool:
+	var local_mouse = get_local_mouse_position()
+	var screen_rect = get_screen_rect()
+
+	# shrink the actionable area by margin to prevent errant input
+	return screen_rect.grow(-margin).has_point(local_mouse)
+
 
 # convert local coordinates to coordinates used in the shader
 func local_to_shader(local : Vector2):
@@ -66,19 +75,29 @@ func compute_point():
 	pass
 
 
+func _process(delta):
+
+	if(!mouse_on_screen()):
+		return
+
+	# smooth panning movement
+	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var target_position = rect_position - rect_size * input_vector
+
+	rect_position = lerp(rect_position, target_position, delta)
+
+
 # drag and zoom input using a mouse
 func _input(event):
-	var local_mouse = get_local_mouse_position()
-	var screen_rect = get_screen_rect()
 
-	# shrink the actionable area by margin to prevent errant input
-	if(!screen_rect.grow(-margin).has_point(local_mouse)):
-		# not my event
+	if(!mouse_on_screen()):
 		# stop dragging
 		dragging = false
 		update_labels.emit()
 		return
 
+	var local_mouse = get_local_mouse_position()
+	var screen_rect = get_screen_rect()
 
 	var old_center: Vector2 = 0.5 * rect_size + rect_position
 
@@ -115,8 +134,3 @@ func _input(event):
 		# drag event
 		# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
 		rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
-
-
-	# faster movement
-	var input_vector : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	rect_position -= pan_speed * rect_size * input_vector
