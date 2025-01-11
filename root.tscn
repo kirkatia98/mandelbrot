@@ -32,7 +32,7 @@ grow_vertical = 2
 script = ExtResource("1_wsftv")
 Mandlebrot = NodePath("MarginContainer/HBoxContainer/Mandlebrot")
 Julia = NodePath("MarginContainer/HBoxContainer/Julia")
-paletteManager = ExtResource("2_srb75")
+pm = ExtResource("2_srb75")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
