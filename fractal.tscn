@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=11 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="2_cw1qa"]
 [ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette_manager.tres" id="2_kjhv3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://boundary_coordinates.gd" id="6_wgcb1"]
 [ext_resource type="Script" path="res://debug_hints.gd" id="7_hf5sh"]
 [ext_resource type="PackedScene" uid="uid://b14scxdvion88" path="res://palette_selection.tscn" id="8_c7m4k"]
+[ext_resource type="Script" path="res://palette_selection.gd" id="9_vyt5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uk4db"]
 resource_local_to_scene = true
@@ -164,8 +165,10 @@ text = "Steps:
 25"
 horizontal_alignment = 1
 
-[node name="Palette Selection" parent="Debug Hints/HBoxContainer" instance=ExtResource("8_c7m4k")]
+[node name="Palette Selection" parent="Debug Hints/HBoxContainer" node_paths=PackedStringArray("f") instance=ExtResource("8_c7m4k")]
 layout_mode = 2
+script = ExtResource("9_vyt5m")
+f = NodePath("../../..")
 
 [node name="Screenshot" type="Button" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
@@ -175,4 +178,5 @@ text = "Screen Shot"
 [connection signal="update_labels" from="." to="Boundary Coordinates" method="_on_fractal_update_labels"]
 [connection signal="update_labels" from="." to="Debug Hints" method="_on_fractal_update_labels"]
 [connection signal="update_shader" from="." to="Screen Viewport/SubViewport/Screen" method="_on_fractal_update_shader"]
+[connection signal="item_selected" from="Debug Hints/HBoxContainer/Palette Selection" to="Debug Hints/HBoxContainer/Palette Selection" method="_on_item_selected"]
 [connection signal="pressed" from="Debug Hints/HBoxContainer/Screenshot" to="Screen Viewport/SubViewport" method="save_png"]
