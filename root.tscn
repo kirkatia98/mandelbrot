@@ -1,19 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
 
-[ext_resource type="Script" path="res://root.gd" id="1_wsftv"]
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
-[ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette_manager.tres" id="2_srb75"]
 [ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="3_6eo24"]
-[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palettes/midnight-ablaze-1x.png" id="4_ydrp2"]
-[ext_resource type="Texture2D" uid="uid://b5rhh3twv06mf" path="res://palettes/slso8-1x.png" id="6_gy3sf"]
+[ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palettes/ayy4-1x.png" id="6_yneso"]
+[ext_resource type="Texture2D" uid="uid://ban8uaxyql3mi" path="res://palettes/ut-underneath-1x.png" id="6_yyeci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
 shader = ExtResource("3_6eo24")
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("4_ydrp2")
+shader_parameter/palette_image = ExtResource("6_yyeci")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ea2"]
 shader = ExtResource("2_on53s")
@@ -21,19 +19,15 @@ shader_parameter/cursor = null
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("6_gy3sf")
+shader_parameter/palette_image = ExtResource("6_yneso")
 
-[node name="Root" type="Control" node_paths=PackedStringArray("Mandlebrot", "Julia")]
+[node name="Root" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_wsftv")
-Mandlebrot = NodePath("MarginContainer/HBoxContainer/Mandlebrot")
-Julia = NodePath("MarginContainer/HBoxContainer/Julia")
-pm = ExtResource("2_srb75")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,13 +49,13 @@ theme_override_constants/separation = 60
 [node name="Mandlebrot" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
 size_flags_horizontal = 3
-palette = 5
-palette_image = ExtResource("4_ydrp2")
+palette = 11
 shader_material = SubResource("ShaderMaterial_vfymx")
+palette_image = ExtResource("6_yyeci")
 
 [node name="Julia" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
 size_flags_horizontal = 3
-palette = 8
-palette_image = ExtResource("6_gy3sf")
+palette = 1
 shader_material = SubResource("ShaderMaterial_r5ea2")
+palette_image = ExtResource("6_yneso")

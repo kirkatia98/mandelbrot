@@ -14,6 +14,15 @@ signal update_shader
 @export var margin : int = 25
 
 
+@export_group("Exported Resources")
+@export var pm : PaletteManager
+@export var screen : ColorRect
+@export var shader_material : ShaderMaterial:
+	set(val):
+		shader_material = val
+		update_shader.emit()
+
+
 @export_group("Shader Paramaters")
 @export var rect_position : Vector2 = Vector2(-2, -2):
 	set(val):
@@ -40,13 +49,6 @@ signal update_shader
 		shader_material.set_shader_parameter("debug", debug)
 
 
-@export_group("Exported Resources")
-@export var pm : PaletteManager
-@export var screen : ColorRect
-@export var shader_material : ShaderMaterial:
-	set(val):
-		shader_material = val
-		update_shader.emit()
 
 
 @onready var dragging : bool = false

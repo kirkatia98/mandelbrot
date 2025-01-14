@@ -5,14 +5,19 @@ extends EditorScript
 
 @export var res_path : String = "res://palette_manager.tres"
 @export var script_path : String = "res://palette.gd"
+@export var scene_path : String = "res://palette_selection.tscn"
 
 # Called when the script is executed (using File -> Run in Script Editor).
 func _run():
 	var manager : PaletteManager = update_resource()
 	var script : Script = update_script(manager)
+	var scene : PackedScene = update_scene(manager)
 
 	ResourceSaver.save(manager, res_path)
 	ResourceSaver.save(script, script_path)
+	ResourceSaver.save(scene, scene_path)
+
+	print("script complete")
 
 
 func update_resource() -> PaletteManager:
@@ -61,14 +66,39 @@ class_name Palette extends RefCounted
 enum Enum {
 	EMPTY"""
 
-func update_script(manager : PaletteManager):
+func update_script(manager : PaletteManager) -> GDScript:
 
 	var script : GDScript = GDScript.new()
 
-	for k : String in manager.names.slice(1):
-		content += ",\n\t%s" % k
+	for key : String in manager.names.slice(1):
+		content += ",\n\t%s" % key
 
 	content += "\n}"
-
 	script.source_code = content
+
 	return script
+
+func update_scene(manager : PaletteManager) -> PackedScene:
+
+	var scene : PackedScene = load(scene_path)
+	var button : OptionButton = scene.instantiate()
+
+	button.clear()
+
+	for i : int in range(manager.num):
+		var name = manager.names[i]
+
+		# texture
+		var grad : GradientTexture2D = GradientTexture2D.new()
+		grad.width = 128
+		grad.height = 32
+		grad.gradient = Gradient.new()
+
+		button.add_item(name)
+		button.set_item_icon(i, grad)
+
+
+	scene.pack(button)
+
+
+	return scene

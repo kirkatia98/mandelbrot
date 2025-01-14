@@ -11,7 +11,7 @@ extends MarginContainer
 
 
 func _on_fractal_update_labels():
-	var fmt_str : String = "(%.3f, %-.3f)"
+	var fmt_str : String = "(%.4f, %-.4f)"
 
 	var x1: float = f.rect_position.x
 	var x2: float = f.rect_position.x + f.rect_size.x
