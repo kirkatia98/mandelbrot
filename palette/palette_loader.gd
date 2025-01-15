@@ -1,17 +1,18 @@
 @tool
 extends EditorScript
 
-@export var folder : String = "res://palettes/"
+@export var folder : String = "res://palette/textures/"
 
-@export var res_path : String = "res://palette_manager.tres"
-@export var script_path : String = "res://palette.gd"
-@export var scene_path : String = "res://palette_selection.tscn"
+@export var res_path : String = "res://palette/palette_manager.tres"
+@export var script_path : String = "res://palette/palette.gd"
+@export var scene_path : String = "res://palette/palette_selection.tscn"
 
 # Called when the script is executed (using File -> Run in Script Editor).
 func _run():
 	var manager : PaletteManager = update_resource()
 	var script : Script = update_script(manager)
 	var scene : PackedScene = update_scene(manager)
+
 
 	ResourceSaver.save(manager, res_path)
 	ResourceSaver.save(script, script_path)
@@ -56,6 +57,7 @@ func update_resource() -> PaletteManager:
 
 	manager.textures.append(null)
 	manager.names.append("EMPTY")
+
 
 	return manager
 

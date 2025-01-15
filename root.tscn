@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
 
-[ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
-[ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
-[ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="3_6eo24"]
-[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palettes/midnight-ablaze-1x.png" id="3_vjxmf"]
-[ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palettes/mulberry-1x.png" id="5_cjykk"]
+[ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal/fractal.tscn" id="2_45h1s"]
+[ext_resource type="Shader" path="res://fractal/shader_code/julia.gdshader" id="2_on53s"]
+[ext_resource type="Shader" path="res://fractal/shader_code/mandlebrot.gdshader" id="3_6eo24"]
+[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palette/textures/midnight-ablaze-1x.png" id="3_vjxmf"]
+[ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palette/textures/mulberry-1x.png" id="5_cjykk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
 shader = ExtResource("3_6eo24")

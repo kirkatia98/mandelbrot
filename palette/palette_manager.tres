@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PaletteManager" load_steps=13 format=3 uid="uid://xsnsugxoclvp"]
+
+[ext_resource type="Script" path="res://palette/palette_manager.gd" id="1_t76we"]
+[ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palette/textures/ayy4-1x.png" id="2_p72pm"]
+[ext_resource type="Texture2D" uid="uid://c84ge7q5jloxc" path="res://palette/textures/cmyk-douce-1x.png" id="3_nplvm"]
+[ext_resource type="Texture2D" uid="uid://dg2fs7o4m7tom" path="res://palette/textures/eulbink-1x.png" id="4_esda6"]
+[ext_resource type="Texture2D" uid="uid://b171om2m2eo4r" path="res://palette/textures/lava-gb-1x.png" id="5_83hu7"]
+[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palette/textures/midnight-ablaze-1x.png" id="6_4c1eq"]
+[ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palette/textures/mulberry-1x.png" id="7_hpmwo"]
+[ext_resource type="Texture2D" uid="uid://c0bfd6vt85wje" path="res://palette/textures/slate-1x.png" id="8_ov8kx"]
+[ext_resource type="Texture2D" uid="uid://b5rhh3twv06mf" path="res://palette/textures/slso8-1x.png" id="9_cimrj"]
+[ext_resource type="Texture2D" uid="uid://byq0n4hvhaic" path="res://palette/textures/swamp-kin-1x.png" id="10_lqxhv"]
+[ext_resource type="Texture2D" uid="uid://vb2r80ipdoe5" path="res://palette/textures/twilight-5-1x.png" id="11_y7dbe"]
+[ext_resource type="Texture2D" uid="uid://ban8uaxyql3mi" path="res://palette/textures/ut-underneath-1x.png" id="12_gw6pr"]
+
+[resource]
+script = ExtResource("1_t76we")
+textures = Array[Texture2D]([ExtResource("2_p72pm"), ExtResource("3_nplvm"), ExtResource("4_esda6"), ExtResource("5_83hu7"), ExtResource("6_4c1eq"), ExtResource("7_hpmwo"), ExtResource("8_ov8kx"), ExtResource("9_cimrj"), ExtResource("10_lqxhv"), ExtResource("11_y7dbe"), ExtResource("12_gw6pr"), null])
+names = Array[String](["AYY4", "CMYK_DOUCE", "EULBINK", "LAVA_GB", "MIDNIGHT_ABLAZE", "MULBERRY", "SLATE", "SLSO8", "SWAMP_KIN", "TWILIGHT_5", "UT_UNDERNEATH", "EMPTY"])
+num = 11
