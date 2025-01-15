@@ -7,8 +7,7 @@
 
 
 vec2 transform_uv(vec2 uv, vec2 rect_position, vec2 rect_size) {
-	// (uv * rect_size) + rect_position;
-	return fma(uv, rect_size, rect_position);
+	return (uv * rect_size) + rect_position;
 }
 
 int scale_iterations(vec2 rect_size){
@@ -17,7 +16,7 @@ int scale_iterations(vec2 rect_size){
 
 vec4 compute_point(vec2 z, vec2 c, int iterations) {
 	vec2 zp;
-	int esc;
+	int esc = iterations;
 
 	// perform at most iterations number of steps
 	for(int loops = 0; loops < iterations; loops++) {
