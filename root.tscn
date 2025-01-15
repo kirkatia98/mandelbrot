@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
 [ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="3_6eo24"]
 
-[sub_resource type="Image" id="Image_mxpcm"]
+[sub_resource type="Image" id="Image_kr8ua"]
 data = {
 "data": PackedByteArray(19, 2, 8, 255, 31, 5, 16, 255, 49, 5, 30, 255, 70, 14, 43, 255, 124, 24, 60, 255, 213, 60, 106, 255, 255, 130, 116, 255),
 "format": "RGBA8",
@@ -14,7 +14,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_qgnmj"]
-image = SubResource("Image_mxpcm")
+image = SubResource("Image_kr8ua")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
 shader = ExtResource("3_6eo24")
@@ -23,7 +23,7 @@ shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = SubResource("ImageTexture_qgnmj")
 
-[sub_resource type="Image" id="Image_omygd"]
+[sub_resource type="Image" id="Image_x8tox"]
 data = {
 "data": PackedByteArray(28, 24, 82, 255, 61, 70, 153, 255, 104, 169, 209, 255, 255, 249, 237, 255, 199, 73, 149, 255),
 "format": "RGBA8",
@@ -33,7 +33,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_w55ph"]
-image = SubResource("Image_omygd")
+image = SubResource("Image_x8tox")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ea2"]
 shader = ExtResource("2_on53s")
@@ -68,7 +68,7 @@ theme_override_constants/margin_bottom = 127
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="Mandlebrot" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
+[node name="Mandelbrot" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
 size_flags_horizontal = 3
 palette = 4

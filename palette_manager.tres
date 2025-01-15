@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://palette_manager.gd" id="1_6xg6x"]
 
-[sub_resource type="Image" id="Image_6fnkd"]
+[sub_resource type="Image" id="Image_ymkiv"]
 data = {
 "data": PackedByteArray(241, 242, 218, 255, 255, 206, 150, 255, 255, 119, 119, 255, 0, 48, 59, 255),
 "format": "RGBA8",
@@ -12,9 +12,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_1ol7u"]
-image = SubResource("Image_6fnkd")
+image = SubResource("Image_ymkiv")
 
-[sub_resource type="Image" id="Image_y7rsg"]
+[sub_resource type="Image" id="Image_hj44a"]
 data = {
 "data": PackedByteArray(27, 25, 42, 255, 201, 56, 100, 255, 53, 203, 200, 255, 255, 219, 133, 255),
 "format": "RGBA8",
@@ -24,9 +24,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_6jjbt"]
-image = SubResource("Image_y7rsg")
+image = SubResource("Image_hj44a")
 
-[sub_resource type="Image" id="Image_33yyf"]
+[sub_resource type="Image" id="Image_43cjl"]
 data = {
 "data": PackedByteArray(32, 21, 51, 255, 37, 36, 70, 255, 32, 53, 98, 255, 30, 87, 156, 255, 0, 152, 219, 255, 12, 230, 242, 255, 255, 255, 255, 255),
 "format": "RGBA8",
@@ -36,9 +36,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mx0qp"]
-image = SubResource("Image_33yyf")
+image = SubResource("Image_43cjl")
 
-[sub_resource type="Image" id="Image_ctnby"]
+[sub_resource type="Image" id="Image_7l8vt"]
 data = {
 "data": PackedByteArray(5, 31, 57, 255, 74, 36, 128, 255, 197, 58, 157, 255, 255, 142, 128, 255),
 "format": "RGBA8",
@@ -48,9 +48,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ypcry"]
-image = SubResource("Image_ctnby")
+image = SubResource("Image_7l8vt")
 
-[sub_resource type="Image" id="Image_8feam"]
+[sub_resource type="Image" id="Image_f2mv5"]
 data = {
 "data": PackedByteArray(19, 2, 8, 255, 31, 5, 16, 255, 49, 5, 30, 255, 70, 14, 43, 255, 124, 24, 60, 255, 213, 60, 106, 255, 255, 130, 116, 255),
 "format": "RGBA8",
@@ -60,9 +60,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_qgnmj"]
-image = SubResource("Image_8feam")
+image = SubResource("Image_f2mv5")
 
-[sub_resource type="Image" id="Image_r3u28"]
+[sub_resource type="Image" id="Image_pxpfb"]
 data = {
 "data": PackedByteArray(28, 24, 82, 255, 61, 70, 153, 255, 104, 169, 209, 255, 255, 249, 237, 255, 199, 73, 149, 255),
 "format": "RGBA8",
@@ -72,9 +72,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_w55ph"]
-image = SubResource("Image_r3u28")
+image = SubResource("Image_pxpfb")
 
-[sub_resource type="Image" id="Image_80d3y"]
+[sub_resource type="Image" id="Image_0mkv4"]
 data = {
 "data": PackedByteArray(41, 39, 54, 255, 73, 85, 108, 255, 96, 129, 137, 255, 190, 176, 159, 255),
 "format": "RGBA8",
@@ -84,9 +84,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_bqw2t"]
-image = SubResource("Image_80d3y")
+image = SubResource("Image_0mkv4")
 
-[sub_resource type="Image" id="Image_rosoh"]
+[sub_resource type="Image" id="Image_lyunp"]
 data = {
 "data": PackedByteArray(13, 43, 69, 255, 32, 60, 86, 255, 84, 78, 104, 255, 141, 105, 122, 255, 208, 129, 89, 255, 255, 170, 94, 255, 255, 212, 163, 255, 255, 236, 214, 255),
 "format": "RGBA8",
@@ -96,9 +96,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vig5d"]
-image = SubResource("Image_rosoh")
+image = SubResource("Image_lyunp")
 
-[sub_resource type="Image" id="Image_pr76h"]
+[sub_resource type="Image" id="Image_2s184"]
 data = {
 "data": PackedByteArray(29, 187, 97, 255, 118, 230, 113, 255, 196, 242, 181, 255, 227, 233, 242, 255, 226, 68, 158, 255, 137, 25, 142, 255, 59, 13, 74, 255, 28, 22, 13, 255),
 "format": "RGBA8",
@@ -108,9 +108,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ai71j"]
-image = SubResource("Image_pr76h")
+image = SubResource("Image_2s184")
 
-[sub_resource type="Image" id="Image_jneff"]
+[sub_resource type="Image" id="Image_2f6il"]
 data = {
 "data": PackedByteArray(251, 187, 173, 255, 238, 134, 149, 255, 74, 122, 150, 255, 51, 63, 88, 255, 41, 40, 49, 255),
 "format": "RGBA8",
@@ -120,9 +120,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_rq3wp"]
-image = SubResource("Image_jneff")
+image = SubResource("Image_2f6il")
 
-[sub_resource type="Image" id="Image_saoy7"]
+[sub_resource type="Image" id="Image_xefi1"]
 data = {
 "data": PackedByteArray(58, 57, 72, 255, 116, 74, 136, 255, 195, 75, 114, 255, 255, 101, 7, 255, 80, 114, 212, 255, 95, 215, 95, 255, 234, 208, 0, 255, 254, 255, 223, 255),
 "format": "RGBA8",
@@ -132,7 +132,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_3pld5"]
-image = SubResource("Image_saoy7")
+image = SubResource("Image_xefi1")
 
 [resource]
 script = ExtResource("1_6xg6x")
