@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=13 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal/fractal.gd" id="2_cw1qa"]
 [ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette/palette_manager.tres" id="2_kjhv3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://fractal/boundary_coordinates.gd" id="6_wgcb1"]
 [ext_resource type="Script" path="res://fractal/debug_hints.gd" id="7_hf5sh"]
 [ext_resource type="PackedScene" uid="uid://b14scxdvion88" path="res://palette/palette_selection.tscn" id="8_c7m4k"]
+[ext_resource type="LabelSettings" uid="uid://dlq3j8j4ty580" path="res://fractal/label_settings.tres" id="8_nua8f"]
 [ext_resource type="Script" path="res://palette/palette_selection.gd" id="9_vyt5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uk4db"]
@@ -89,6 +90,7 @@ layout_mode = 1
 offset_right = 111.0
 offset_bottom = 23.0
 text = "(-2.0000, -2.0000)"
+label_settings = ExtResource("8_nua8f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -101,6 +103,7 @@ offset_left = -106.0
 offset_bottom = 23.0
 grow_horizontal = 0
 text = "(2.0000, -2.0000)"
+label_settings = ExtResource("8_nua8f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -116,6 +119,7 @@ offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "(2.0000, 2.0000)"
+label_settings = ExtResource("8_nua8f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -128,6 +132,7 @@ offset_top = -23.0
 offset_right = 101.0
 grow_vertical = 0
 text = "(2.0000, 2.0000)"
+label_settings = ExtResource("8_nua8f")
 horizontal_alignment = 1
 vertical_alignment = 1
 

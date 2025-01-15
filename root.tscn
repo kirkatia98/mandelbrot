@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal/fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://fractal/shader_code/julia.gdshader" id="2_on53s"]
 [ext_resource type="Shader" path="res://fractal/shader_code/mandlebrot.gdshader" id="3_6eo24"]
-[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palette/textures/midnight-ablaze-1x.png" id="3_vjxmf"]
+[ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palette/textures/ayy4-1x.png" id="3_qpl6f"]
 [ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palette/textures/mulberry-1x.png" id="5_cjykk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
@@ -11,7 +11,7 @@ shader = ExtResource("3_6eo24")
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = ExtResource("3_vjxmf")
+shader_parameter/palette_image = ExtResource("3_qpl6f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ea2"]
 shader = ExtResource("2_on53s")
@@ -49,9 +49,7 @@ theme_override_constants/separation = 60
 [node name="Mandelbrot" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
 size_flags_horizontal = 3
-palette = 4
 shader_material = SubResource("ShaderMaterial_vfymx")
-palette_image = ExtResource("3_vjxmf")
 
 [node name="Julia" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
