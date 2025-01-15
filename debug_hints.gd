@@ -4,23 +4,14 @@ extends MarginContainer
 @export var f : Fractal
 
 @export_group("Debug Hints")
-@export var RP : Label
-@export var RS : Label
 @export var MP : Label
-@export var ES : Label
 @export var MS : Label
 
 
 func _on_fractal_update_labels():
 	var fmt_str : String = "%.10f, %.10f"
 
-	# Set Debug Hints
-	RP.text = "Rect Position:\n" + fmt_str % [f.rect_position.x, f.rect_position.y]
-	RS.text = "Rect Size\n" + fmt_str % [f.rect_size.x, f.rect_size.y]
-	ES.text = "Steps:\n_"
 	MS.text = "Steps:\n%d" % f.scale_iterations()
-
-
 
 	var mp_text = "(_, _)"
 	if not Engine.is_editor_hint():

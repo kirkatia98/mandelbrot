@@ -4,11 +4,18 @@ class_name Fractal extends Control
 signal update_labels
 signal update_shader
 
+@export var palette : Palette.Enum:
+	set(val):
+		palette = val
+		palette_image = pm.textures[val]
 
 @export var pan_speed : float = 0.05
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
 
+
+@export_group("Exported Resources")
+@export var pm : PaletteManager
 @export var screen : ColorRect
 @export var shader_material : ShaderMaterial:
 	set(val):
@@ -36,11 +43,13 @@ signal update_shader
 		palette_image = val
 		shader_material.set_shader_parameter("palette_image", val)
 
-
 @export var debug : bool = false :
 	set(val):
 		debug = val
 		shader_material.set_shader_parameter("debug", debug)
+
+
+
 
 @onready var dragging : bool = false
 @onready var old_pos : Vector2

@@ -1,0 +1,16 @@
+class_name Palette extends RefCounted
+
+enum Enum {
+	AYY4,
+	CMYK_DOUCE,
+	EULBINK,
+	LAVA_GB,
+	MIDNIGHT_ABLAZE,
+	MULBERRY,
+	SLATE,
+	SLSO8,
+	SWAMP_KIN,
+	TWILIGHT_5,
+	UT_UNDERNEATH,
+	EMPTY
+}
