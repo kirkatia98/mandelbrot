@@ -1,136 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://b14scxdvion88"]
+[gd_scene load_steps=12 format=3 uid="uid://b14scxdvion88"]
 
-[sub_resource type="Image" id="Image_da6q0"]
-data = {
-"data": PackedByteArray(241, 242, 218, 255, 255, 206, 150, 255, 255, 119, 119, 255, 0, 48, 59, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 4
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_1ol7u"]
-image = SubResource("Image_da6q0")
-
-[sub_resource type="Image" id="Image_4ts37"]
-data = {
-"data": PackedByteArray(27, 25, 42, 255, 201, 56, 100, 255, 53, 203, 200, 255, 255, 219, 133, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 4
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_6jjbt"]
-image = SubResource("Image_4ts37")
-
-[sub_resource type="Image" id="Image_l2f53"]
-data = {
-"data": PackedByteArray(32, 21, 51, 255, 37, 36, 70, 255, 32, 53, 98, 255, 30, 87, 156, 255, 0, 152, 219, 255, 12, 230, 242, 255, 255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 7
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_mx0qp"]
-image = SubResource("Image_l2f53")
-
-[sub_resource type="Image" id="Image_0ub4p"]
-data = {
-"data": PackedByteArray(5, 31, 57, 255, 74, 36, 128, 255, 197, 58, 157, 255, 255, 142, 128, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 4
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_ypcry"]
-image = SubResource("Image_0ub4p")
-
-[sub_resource type="Image" id="Image_65tm0"]
-data = {
-"data": PackedByteArray(19, 2, 8, 255, 31, 5, 16, 255, 49, 5, 30, 255, 70, 14, 43, 255, 124, 24, 60, 255, 213, 60, 106, 255, 255, 130, 116, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 7
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_qgnmj"]
-image = SubResource("Image_65tm0")
-
-[sub_resource type="Image" id="Image_phvf3"]
-data = {
-"data": PackedByteArray(28, 24, 82, 255, 61, 70, 153, 255, 104, 169, 209, 255, 255, 249, 237, 255, 199, 73, 149, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 5
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_w55ph"]
-image = SubResource("Image_phvf3")
-
-[sub_resource type="Image" id="Image_sq0fk"]
-data = {
-"data": PackedByteArray(41, 39, 54, 255, 73, 85, 108, 255, 96, 129, 137, 255, 190, 176, 159, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 4
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_bqw2t"]
-image = SubResource("Image_sq0fk")
-
-[sub_resource type="Image" id="Image_x1qh0"]
-data = {
-"data": PackedByteArray(13, 43, 69, 255, 32, 60, 86, 255, 84, 78, 104, 255, 141, 105, 122, 255, 208, 129, 89, 255, 255, 170, 94, 255, 255, 212, 163, 255, 255, 236, 214, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 8
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_vig5d"]
-image = SubResource("Image_x1qh0")
-
-[sub_resource type="Image" id="Image_sv22s"]
-data = {
-"data": PackedByteArray(29, 187, 97, 255, 118, 230, 113, 255, 196, 242, 181, 255, 227, 233, 242, 255, 226, 68, 158, 255, 137, 25, 142, 255, 59, 13, 74, 255, 28, 22, 13, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 8
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_ai71j"]
-image = SubResource("Image_sv22s")
-
-[sub_resource type="Image" id="Image_re47k"]
-data = {
-"data": PackedByteArray(251, 187, 173, 255, 238, 134, 149, 255, 74, 122, 150, 255, 51, 63, 88, 255, 41, 40, 49, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 5
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_rq3wp"]
-image = SubResource("Image_re47k")
-
-[sub_resource type="Image" id="Image_v6fvj"]
-data = {
-"data": PackedByteArray(58, 57, 72, 255, 116, 74, 136, 255, 195, 75, 114, 255, 255, 101, 7, 255, 80, 114, 212, 255, 95, 215, 95, 255, 234, 208, 0, 255, 254, 255, 223, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 8
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_3pld5"]
-image = SubResource("Image_v6fvj")
+[ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palettes/ayy4-1x.png" id="1_ace80"]
+[ext_resource type="Texture2D" uid="uid://c84ge7q5jloxc" path="res://palettes/cmyk-douce-1x.png" id="2_sonut"]
+[ext_resource type="Texture2D" uid="uid://dg2fs7o4m7tom" path="res://palettes/eulbink-1x.png" id="3_33hfr"]
+[ext_resource type="Texture2D" uid="uid://b171om2m2eo4r" path="res://palettes/lava-gb-1x.png" id="4_j5fed"]
+[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palettes/midnight-ablaze-1x.png" id="5_htfo6"]
+[ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palettes/mulberry-1x.png" id="6_tut5j"]
+[ext_resource type="Texture2D" uid="uid://c0bfd6vt85wje" path="res://palettes/slate-1x.png" id="7_x15ts"]
+[ext_resource type="Texture2D" uid="uid://b5rhh3twv06mf" path="res://palettes/slso8-1x.png" id="8_4xhwd"]
+[ext_resource type="Texture2D" uid="uid://byq0n4hvhaic" path="res://palettes/swamp-kin-1x.png" id="9_q7mke"]
+[ext_resource type="Texture2D" uid="uid://vb2r80ipdoe5" path="res://palettes/twilight-5-1x.png" id="10_tsolt"]
+[ext_resource type="Texture2D" uid="uid://ban8uaxyql3mi" path="res://palettes/ut-underneath-1x.png" id="11_7a6f7"]
 
 [node name="Palette Selection" type="OptionButton"]
 anchors_preset = 8
@@ -152,36 +32,36 @@ expand_icon = true
 selected = 0
 item_count = 12
 popup/item_0/text = "AYY4"
-popup/item_0/icon = SubResource("ImageTexture_1ol7u")
+popup/item_0/icon = ExtResource("1_ace80")
 popup/item_1/text = "CMYK_DOUCE"
-popup/item_1/icon = SubResource("ImageTexture_6jjbt")
+popup/item_1/icon = ExtResource("2_sonut")
 popup/item_1/id = 1
 popup/item_2/text = "EULBINK"
-popup/item_2/icon = SubResource("ImageTexture_mx0qp")
+popup/item_2/icon = ExtResource("3_33hfr")
 popup/item_2/id = 2
 popup/item_3/text = "LAVA_GB"
-popup/item_3/icon = SubResource("ImageTexture_ypcry")
+popup/item_3/icon = ExtResource("4_j5fed")
 popup/item_3/id = 3
 popup/item_4/text = "MIDNIGHT_ABLAZE"
-popup/item_4/icon = SubResource("ImageTexture_qgnmj")
+popup/item_4/icon = ExtResource("5_htfo6")
 popup/item_4/id = 4
 popup/item_5/text = "MULBERRY"
-popup/item_5/icon = SubResource("ImageTexture_w55ph")
+popup/item_5/icon = ExtResource("6_tut5j")
 popup/item_5/id = 5
 popup/item_6/text = "SLATE"
-popup/item_6/icon = SubResource("ImageTexture_bqw2t")
+popup/item_6/icon = ExtResource("7_x15ts")
 popup/item_6/id = 6
 popup/item_7/text = "SLSO8"
-popup/item_7/icon = SubResource("ImageTexture_vig5d")
+popup/item_7/icon = ExtResource("8_4xhwd")
 popup/item_7/id = 7
 popup/item_8/text = "SWAMP_KIN"
-popup/item_8/icon = SubResource("ImageTexture_ai71j")
+popup/item_8/icon = ExtResource("9_q7mke")
 popup/item_8/id = 8
 popup/item_9/text = "TWILIGHT_5"
-popup/item_9/icon = SubResource("ImageTexture_rq3wp")
+popup/item_9/icon = ExtResource("10_tsolt")
 popup/item_9/id = 9
 popup/item_10/text = "UT_UNDERNEATH"
-popup/item_10/icon = SubResource("ImageTexture_3pld5")
+popup/item_10/icon = ExtResource("11_7a6f7")
 popup/item_10/id = 10
 popup/item_11/text = "EMPTY"
 popup/item_11/id = 11

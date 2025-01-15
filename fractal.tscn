@@ -1,26 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=12 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="2_cw1qa"]
 [ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette_manager.tres" id="2_kjhv3"]
 [ext_resource type="Script" path="res://viewport.gd" id="4_173sy"]
 [ext_resource type="Shader" path="res://shader_code/sample.gdshader" id="4_lsovt"]
+[ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palettes/ayy4-1x.png" id="4_x832o"]
 [ext_resource type="Script" path="res://screen.gd" id="6_ehckw"]
 [ext_resource type="Script" path="res://boundary_coordinates.gd" id="6_wgcb1"]
 [ext_resource type="Script" path="res://debug_hints.gd" id="7_hf5sh"]
 [ext_resource type="PackedScene" uid="uid://b14scxdvion88" path="res://palette_selection.tscn" id="8_c7m4k"]
 [ext_resource type="Script" path="res://palette_selection.gd" id="9_vyt5m"]
-
-[sub_resource type="Image" id="Image_0ygxy"]
-data = {
-"data": PackedByteArray(241, 242, 218, 255, 255, 206, 150, 255, 255, 119, 119, 255, 0, 48, 59, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 4
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_1ol7u"]
-image = SubResource("Image_0ygxy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uk4db"]
 resource_local_to_scene = true
@@ -29,7 +18,7 @@ shader_parameter/cursor = null
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = SubResource("ImageTexture_1ol7u")
+shader_parameter/palette_image = ExtResource("4_x832o")
 
 [node name="Fractal" type="Control" node_paths=PackedStringArray("screen")]
 layout_mode = 3
@@ -43,7 +32,7 @@ script = ExtResource("2_cw1qa")
 pm = ExtResource("2_kjhv3")
 screen = NodePath("Screen Viewport/SubViewport/Screen")
 shader_material = SubResource("ShaderMaterial_uk4db")
-palette_image = SubResource("ImageTexture_1ol7u")
+palette_image = ExtResource("4_x832o")
 
 [node name="Screen Viewport" type="SubViewportContainer" parent="."]
 custom_minimum_size = Vector2(100, 100)

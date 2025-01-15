@@ -1,7 +1,7 @@
 @tool
 class_name PaletteManager extends Resource
 
-@export var textures : Array[ImageTexture]
+@export var textures : Array[Texture2D]
 @export var names : Array[String]
 
 @export var num : int

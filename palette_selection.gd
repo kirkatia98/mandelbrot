@@ -8,9 +8,13 @@ func _ready():
 
 	for i in range(f.pm.num):
 
-		# scale up the BUTTON's copy of the texture
-		get_item_icon(i).set_size_override(Vector2i(128, 32))
+		# Image texture allows overriding texture size,
+		# so replace BUTTON's copy of the texture
+		var img : Image = get_item_icon(i).get_image()
+		var txt : ImageTexture = ImageTexture.create_from_image(img)
 
+		txt.set_size_override(Vector2i(128, 32))
+		set_item_icon(i, txt)
 
 
 func _on_item_selected(index):

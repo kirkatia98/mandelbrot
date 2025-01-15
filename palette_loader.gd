@@ -38,8 +38,7 @@ func update_resource() -> PaletteManager:
 			break
 
 		# load as a texture
-		var img : Image = load(folder + file_name)
-		var txt : ImageTexture = ImageTexture.create_from_image(img)
+		var txt : Texture2D = load(folder + file_name)
 
 		var name : String = file_name
 
@@ -90,7 +89,8 @@ func update_scene(manager : PaletteManager) -> PackedScene:
 
 	for i : int in range(manager.num):
 		var name : String = manager.names[i]
-		var txt : ImageTexture = manager.textures[i]
+		var txt : Texture2D = manager.textures[i]
+
 
 		button.add_item(name)
 		button.set_item_icon(i, txt)

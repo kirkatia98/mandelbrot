@@ -1,39 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://shader_code/julia.gdshader" id="2_on53s"]
 [ext_resource type="Shader" path="res://shader_code/mandlebrot.gdshader" id="3_6eo24"]
-
-[sub_resource type="Image" id="Image_kr8ua"]
-data = {
-"data": PackedByteArray(19, 2, 8, 255, 31, 5, 16, 255, 49, 5, 30, 255, 70, 14, 43, 255, 124, 24, 60, 255, 213, 60, 106, 255, 255, 130, 116, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 7
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_qgnmj"]
-image = SubResource("Image_kr8ua")
+[ext_resource type="Texture2D" uid="uid://bfmu24sbh31lw" path="res://palettes/midnight-ablaze-1x.png" id="3_vjxmf"]
+[ext_resource type="Texture2D" uid="uid://brypg8muysawd" path="res://palettes/mulberry-1x.png" id="5_cjykk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
 shader = ExtResource("3_6eo24")
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = SubResource("ImageTexture_qgnmj")
-
-[sub_resource type="Image" id="Image_x8tox"]
-data = {
-"data": PackedByteArray(28, 24, 82, 255, 61, 70, 153, 255, 104, 169, 209, 255, 255, 249, 237, 255, 199, 73, 149, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 5
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_w55ph"]
-image = SubResource("Image_x8tox")
+shader_parameter/palette_image = ExtResource("3_vjxmf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ea2"]
 shader = ExtResource("2_on53s")
@@ -41,7 +19,7 @@ shader_parameter/cursor = null
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
-shader_parameter/palette_image = SubResource("ImageTexture_w55ph")
+shader_parameter/palette_image = ExtResource("5_cjykk")
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -73,11 +51,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 palette = 4
 shader_material = SubResource("ShaderMaterial_vfymx")
-palette_image = SubResource("ImageTexture_qgnmj")
+palette_image = ExtResource("3_vjxmf")
 
 [node name="Julia" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
 layout_mode = 2
 size_flags_horizontal = 3
 palette = 5
 shader_material = SubResource("ShaderMaterial_r5ea2")
-palette_image = SubResource("ImageTexture_w55ph")
+palette_image = ExtResource("5_cjykk")
