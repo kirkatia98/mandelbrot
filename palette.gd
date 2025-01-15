@@ -1,8 +1,6 @@
-
 class_name Palette extends RefCounted
 
 enum Enum {
-	EMPTY,
 	AYY4,
 	CMYK_DOUCE,
 	EULBINK,
@@ -13,5 +11,6 @@ enum Enum {
 	SLSO8,
 	SWAMP_KIN,
 	TWILIGHT_5,
-	UT_UNDERNEATH
+	UT_UNDERNEATH,
+	EMPTY
 }

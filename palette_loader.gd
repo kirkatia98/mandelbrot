@@ -30,9 +30,6 @@ func update_resource() -> PaletteManager:
 	var dir = DirAccess.open(folder)
 	dir.list_dir_begin()
 
-	manager.textures.append(null)
-	manager.names.append("EMPTY")
-
 	while true:
 
 		# get the next palette
@@ -41,7 +38,9 @@ func update_resource() -> PaletteManager:
 			break
 
 		# load as a texture
-		var txt : Texture2D = load(folder + file_name)
+		var img : Image = load(folder + file_name)
+		var txt : ImageTexture = ImageTexture.create_from_image(img)
+
 		var name : String = file_name
 
 		name = name.trim_suffix("-1x.png")
@@ -54,26 +53,29 @@ func update_resource() -> PaletteManager:
 		# skip .import
 		dir.get_next()
 
-
 	manager.num = manager.names.size()
+
+	manager.textures.append(null)
+	manager.names.append("EMPTY")
 
 	return manager
 
 
-var content = """
-class_name Palette extends RefCounted
+var content = """class_name Palette extends RefCounted
 
-enum Enum {
-	EMPTY"""
+enum Enum {"""
 
 func update_script(manager : PaletteManager) -> GDScript:
 
 	var script : GDScript = GDScript.new()
 
-	for key : String in manager.names.slice(1):
-		content += ",\n\t%s" % key
+	for i : int in range(manager.num):
+		var name : String = manager.names[i]
+		content += "\n\t%s," % name
 
+	content += "\n\tEMPTY"
 	content += "\n}"
+
 	script.source_code = content
 
 	return script
@@ -85,18 +87,16 @@ func update_scene(manager : PaletteManager) -> PackedScene:
 
 	button.clear()
 
-	for i : int in range(manager.num):
-		var name = manager.names[i]
 
-		# texture
-		var grad : GradientTexture2D = GradientTexture2D.new()
-		grad.width = 128
-		grad.height = 32
-		grad.gradient = Gradient.new()
+	for i : int in range(manager.num):
+		var name : String = manager.names[i]
+		var txt : ImageTexture = manager.textures[i]
 
 		button.add_item(name)
-		button.set_item_icon(i, grad)
+		button.set_item_icon(i, txt)
 
+	# Empty Palette
+	button.add_item("EMPTY")
 
 	scene.pack(button)
 

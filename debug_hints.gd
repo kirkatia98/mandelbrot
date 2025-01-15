@@ -13,8 +13,6 @@ func _on_fractal_update_labels():
 
 	MS.text = "Steps:\n%d" % f.scale_iterations()
 
-
-
 	var mp_text = "(_, _)"
 	if not Engine.is_editor_hint():
 

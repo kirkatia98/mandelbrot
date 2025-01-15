@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=13 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal.gd" id="2_cw1qa"]
 [ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette_manager.tres" id="2_kjhv3"]
@@ -10,6 +10,18 @@
 [ext_resource type="PackedScene" uid="uid://b14scxdvion88" path="res://palette_selection.tscn" id="8_c7m4k"]
 [ext_resource type="Script" path="res://palette_selection.gd" id="9_vyt5m"]
 
+[sub_resource type="Image" id="Image_0ygxy"]
+data = {
+"data": PackedByteArray(241, 242, 218, 255, 255, 206, 150, 255, 255, 119, 119, 255, 0, 48, 59, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_1ol7u"]
+image = SubResource("Image_0ygxy")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uk4db"]
 resource_local_to_scene = true
 shader = ExtResource("4_lsovt")
@@ -17,6 +29,7 @@ shader_parameter/cursor = null
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
+shader_parameter/palette_image = SubResource("ImageTexture_1ol7u")
 
 [node name="Fractal" type="Control" node_paths=PackedStringArray("screen")]
 layout_mode = 3
@@ -30,6 +43,7 @@ script = ExtResource("2_cw1qa")
 pm = ExtResource("2_kjhv3")
 screen = NodePath("Screen Viewport/SubViewport/Screen")
 shader_material = SubResource("ShaderMaterial_uk4db")
+palette_image = SubResource("ImageTexture_1ol7u")
 
 [node name="Screen Viewport" type="SubViewportContainer" parent="."]
 custom_minimum_size = Vector2(100, 100)
@@ -165,18 +179,18 @@ text = "Steps:
 25"
 horizontal_alignment = 1
 
-[node name="Palette Selection" parent="Debug Hints/HBoxContainer" node_paths=PackedStringArray("f") instance=ExtResource("8_c7m4k")]
-layout_mode = 2
-script = ExtResource("9_vyt5m")
-f = NodePath("../../..")
-
 [node name="Screenshot" type="Button" parent="Debug Hints/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Screen Shot"
 
+[node name="Palette Selection" parent="Debug Hints/HBoxContainer" node_paths=PackedStringArray("f") instance=ExtResource("8_c7m4k")]
+layout_mode = 2
+script = ExtResource("9_vyt5m")
+f = NodePath("../../..")
+
 [connection signal="update_labels" from="." to="Boundary Coordinates" method="_on_fractal_update_labels"]
 [connection signal="update_labels" from="." to="Debug Hints" method="_on_fractal_update_labels"]
 [connection signal="update_shader" from="." to="Screen Viewport/SubViewport/Screen" method="_on_fractal_update_shader"]
-[connection signal="item_selected" from="Debug Hints/HBoxContainer/Palette Selection" to="Debug Hints/HBoxContainer/Palette Selection" method="_on_item_selected"]
 [connection signal="pressed" from="Debug Hints/HBoxContainer/Screenshot" to="Screen Viewport/SubViewport" method="save_png"]
+[connection signal="item_selected" from="Debug Hints/HBoxContainer/Palette Selection" to="Debug Hints/HBoxContainer/Palette Selection" method="_on_item_selected"]
