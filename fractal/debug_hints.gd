@@ -14,7 +14,7 @@ func _on_fractal_update_labels():
 	MS.text = "Steps:\n%d" % f.scale_iterations()
 
 	var mp_text = "(_, _)"
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and f.is_node_ready():
 
 		# if in the code, get the local mouse position and scale it to the display size
 		var local_mouse = f.get_local_mouse_position()
