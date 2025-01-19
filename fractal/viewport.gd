@@ -18,4 +18,8 @@ func save_png():
 	var time : Dictionary = Time.get_datetime_dict_from_system()
 	var img_name = fmt_str % [f.name, time["month"], time["day"], time["hour"], time["minute"] ]
 
-	image.save_png(root + folder + img_name)
+	if OS.has_feature("web"):
+		var buffer = image.save_png_to_buffer()
+		JavaScriptBridge.download_buffer(buffer, "%s.png" % img_name, "image/png")
+	else:
+		image.save_png(root + folder + img_name)
