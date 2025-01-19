@@ -186,5 +186,6 @@ f = NodePath("../../..")
 [connection signal="update_labels" from="." to="Boundary Coordinates" method="_on_fractal_update_labels"]
 [connection signal="update_labels" from="." to="Debug Hints" method="_on_fractal_update_labels"]
 [connection signal="update_shader" from="." to="Screen Viewport/SubViewport/Screen" method="_on_fractal_update_shader"]
+[connection signal="resized" from="Screen Viewport/SubViewport/Screen" to="Screen Viewport/SubViewport/Screen" method="_on_resized"]
 [connection signal="pressed" from="Debug Hints/HBoxContainer/Screenshot" to="Screen Viewport/SubViewport" method="save_png"]
 [connection signal="item_selected" from="Debug Hints/HBoxContainer/Palette Selection" to="Debug Hints/HBoxContainer/Palette Selection" method="_on_item_selected"]

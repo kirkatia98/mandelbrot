@@ -4,10 +4,12 @@ class_name Fractal extends Control
 signal update_labels
 signal update_shader
 
+
 @export var palette : Palette.Enum:
 	set(val):
 		palette = val
 		palette_image = pm.textures[val]
+
 
 @export var pan_speed : float = 0.05
 @export var zoom_speed : float = 0.95
@@ -43,17 +45,17 @@ signal update_shader
 		palette_image = val
 		shader_material.set_shader_parameter("palette_image", val)
 
+
 @export var debug : bool = false :
 	set(val):
 		debug = val
 		shader_material.set_shader_parameter("debug", debug)
 
 
-
-
 @onready var dragging : bool = false
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
+
 
 func get_screen_rect() -> Rect2:
 	return screen.get_rect()
@@ -86,7 +88,7 @@ func compute_point():
 
 func _process(delta):
 
-	if(!mouse_on_screen()):
+	if(!mouse_on_screen() or Engine.is_editor_hint()):
 		return
 
 	# smooth panning movement
