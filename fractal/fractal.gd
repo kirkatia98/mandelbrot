@@ -4,6 +4,8 @@ class_name Fractal extends Control
 signal update_labels
 signal update_shader
 
+enum FractalType { NONE, MANDLEBROT, JULIA }
+@export var fractalType: FractalType
 
 @export var palette : Palette.Enum:
 	set(val):
@@ -14,7 +16,6 @@ signal update_shader
 @export var pan_speed : float = 0.05
 @export var zoom_speed : float = 0.95
 @export var margin : int = 25
-
 
 @export_group("Exported Resources")
 @export var pm : PaletteManager
@@ -82,9 +83,30 @@ func scale_iterations():
 	return int(50.0/pow(rect_size.length(), 0.4))
 
 
-func compute_point():
-	pass
+func compute_point(iterations : int, coord : Vector2):
+	var z : Vector2 = Vector2(0.0, 0.0)
+	var c : Vector2 = Vector2(0.0, 0.0)
 
+	var esc : int = iterations
+
+	match(fractalType):
+		FractalType.NONE:
+			return 0
+		FractalType.MANDLEBROT:
+			c = coord
+		FractalType.JULIA:
+			z = coord
+
+	var zp : Vector2
+	for loops in range(0, iterations):
+		zp = Vector2( pow(z.x, 2.0) - pow(z.y, 2.0), 2 * z.x * z.y ) + c
+		z = zp
+
+		if zp.length() >= 2.0 :
+			esc = loops
+			break
+
+	return esc
 
 func _process(delta):
 
