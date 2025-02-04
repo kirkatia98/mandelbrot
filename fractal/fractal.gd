@@ -53,10 +53,15 @@ enum FractalType { NONE, MANDLEBROT, JULIA }
 		shader_material.set_shader_parameter("debug", debug)
 
 
+@onready var on_screen : bool = false
 @onready var dragging : bool = false
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
 
+
+@onready var shader_coords : Vector2
+@onready var iterations : int
+@onready var esc : int
 
 func get_screen_rect() -> Rect2:
 	return screen.get_rect()
@@ -83,11 +88,9 @@ func scale_iterations():
 	return int(50.0/pow(rect_size.length(), 0.4))
 
 
-func compute_point(iterations : int, coord : Vector2):
+func compute_point(max_loops : int, coord : Vector2):
 	var z : Vector2 = Vector2(0.0, 0.0)
 	var c : Vector2 = Vector2(0.0, 0.0)
-
-	var esc : int = iterations
 
 	match(fractalType):
 		FractalType.NONE:
@@ -98,15 +101,14 @@ func compute_point(iterations : int, coord : Vector2):
 			z = coord
 
 	var zp : Vector2
-	for loops in range(0, iterations):
+	for loops in range(0, max_loops):
 		zp = Vector2( pow(z.x, 2.0) - pow(z.y, 2.0), 2 * z.x * z.y ) + c
 		z = zp
 
 		if zp.length() >= 2.0 :
-			esc = loops
-			break
+			return loops
 
-	return esc
+	return max_loops
 
 func _process(delta):
 
@@ -126,8 +128,11 @@ func _input(event):
 	if(!mouse_on_screen()):
 		# stop dragging
 		dragging = false
+		on_screen = false
 		update_labels.emit()
 		return
+
+	on_screen = true
 
 	var local_mouse = get_local_mouse_position()
 	var screen_rect = get_screen_rect()
@@ -163,7 +168,13 @@ func _input(event):
 					old_pos = rect_position
 
 
-	if event is InputEventMouseMotion and dragging:
+	if event is InputEventMouseMotion:
+		# save the shader space coordinate, and compute result
+		shader_coords = local_to_shader(local_mouse)
+		iterations = scale_iterations()
+		esc = compute_point(iterations, shader_coords)
+
 		# drag event
-		# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
-		rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
+		if dragging:
+			# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
+			rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
