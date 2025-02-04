@@ -16,7 +16,7 @@ void fragment() {
 	vec2 uv = transform_uv(UV, rect_position, rect_size);
 
 	// Center and scale the mandelbrot set, and set the initial conditons for z = 0
-	vec2 c = vec2(-0.70176, 0.3842);
+	vec2 c = cursor;
 	vec2 z = uv;
 
 	int iterations = scale_iterations(rect_size);

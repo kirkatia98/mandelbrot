@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://daft7bxk2ijia"]
+[gd_scene load_steps=11 format=3 uid="uid://daft7bxk2ijia"]
 
 [ext_resource type="PackedScene" uid="uid://ctmsc8syid57c" path="res://fractal/fractal.tscn" id="2_45h1s"]
 [ext_resource type="Shader" path="res://fractal/shader_code/julia.gdshader" id="2_on53s"]
@@ -15,11 +15,34 @@ shader_parameter/palette_image = ExtResource("3_s6hs8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ea2"]
 shader = ExtResource("2_on53s")
-shader_parameter/cursor = null
+shader_parameter/cursor = Vector2(-0.702, 0.384)
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
 shader_parameter/palette_image = ExtResource("5_vu62g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjes4"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -287.0
+angle_max = 245.1
+initial_velocity_min = -9.5
+initial_velocity_max = 9.0
+gravity = Vector3(0, 0, 0)
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+
+[sub_resource type="Gradient" id="Gradient_t3b17"]
+offsets = PackedFloat32Array(0.263914, 1)
+colors = PackedColorArray(1, 1, 1, 0.0588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bkmux"]
+gradient = SubResource("Gradient_t3b17")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -63,3 +86,16 @@ fractalType = 2
 shader_material = SubResource("ShaderMaterial_r5ea2")
 rect_position = Vector2(-2, -2)
 rect_size = Vector2(4, 4)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(592, 306)
+emitting = false
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_bjes4")
+texture = SubResource("GradientTexture2D_bkmux")
+lifetime = 0.5
+randomness = 0.5
+trail_lifetime = 2.0
+
+[connection signal="update_cursor" from="MarginContainer/HBoxContainer/Mandelbrot" to="MarginContainer/HBoxContainer/Julia" method="set_cursor"]

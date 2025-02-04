@@ -3,6 +3,7 @@ class_name Fractal extends Control
 
 signal update_labels
 signal update_shader
+signal update_cursor
 
 enum FractalType { NONE, MANDLEBROT, JULIA }
 @export var fractalType: FractalType
@@ -55,6 +56,8 @@ enum FractalType { NONE, MANDLEBROT, JULIA }
 
 @onready var on_screen : bool = false
 @onready var dragging : bool = false
+@onready var drag_julia : bool = false
+
 @onready var old_pos : Vector2
 @onready var old_mouse : Vector2
 
@@ -121,6 +124,11 @@ func _process(delta):
 
 	rect_position = lerp(rect_position, target_position, delta)
 
+# the mandlebrot instance emits a signal that the julia instance connects to
+func set_cursor(cursor : Vector2):
+	#update cursor variable in the julia set
+	shader_material.set_shader_parameter("cursor", cursor)
+
 
 # drag and zoom input using a mouse
 func _input(event):
@@ -129,6 +137,7 @@ func _input(event):
 		# stop dragging
 		dragging = false
 		on_screen = false
+		drag_julia = false
 		update_labels.emit()
 		return
 
@@ -138,6 +147,11 @@ func _input(event):
 	var screen_rect = get_screen_rect()
 
 	var old_center: Vector2 = 0.5 * rect_size + rect_position
+
+	# save the shader space coordinate, and compute result
+	shader_coords = local_to_shader(local_mouse)
+	iterations = scale_iterations()
+	esc = compute_point(iterations, shader_coords)
 
 	if event is InputEventMouseButton:
 		match(event.button_index):
@@ -167,14 +181,20 @@ func _input(event):
 					old_mouse = local_mouse
 					old_pos = rect_position
 
+			MOUSE_BUTTON_RIGHT:
+				drag_julia = event.is_pressed()
+
+				if drag_julia:
+					update_cursor.emit(shader_coords)
+				pass
+
 
 	if event is InputEventMouseMotion:
-		# save the shader space coordinate, and compute result
-		shader_coords = local_to_shader(local_mouse)
-		iterations = scale_iterations()
-		esc = compute_point(iterations, shader_coords)
 
 		# drag event
 		if dragging:
 			# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
 			rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
+
+		if drag_julia:
+			update_cursor.emit(shader_coords)
