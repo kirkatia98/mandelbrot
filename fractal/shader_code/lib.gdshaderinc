@@ -51,13 +51,15 @@ vec4 compute_color(vec4 m, sampler2D palette_image){
 
 	float esc_strength = tone(esc_time/iterations, 3.0);
 
-	float c_ind = esc_strength * float(color_count);
+	float c_float = esc_strength * float(color_count);
+	int c_ind = int(c_float);
 
-	vec3 color1 = texelFetch(palette_image, ivec2(int(c_ind), 0), 0).rgb;
-	vec3 color2 = texelFetch(palette_image, ivec2(int(c_ind) + 1, 0), 0).rgb;
+
+	vec3 color1 = texelFetch(palette_image, ivec2(c_ind, 0), 0).rgb;
+	vec3 color2 = texelFetch(palette_image, ivec2(c_ind + 1, 0), 0).rgb;
 
 	if(m.z != m.w) {
-		return vec4(mix(color1, color2, fract(c_ind)), 1.0);
+		return vec4(mix(color1, color2, fract(c_float)), 1.0);
 	} else {
 		// f(z, c) never escaped
 		return vec4(vec3(0), 1);
