@@ -8,6 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfymx"]
 shader = ExtResource("3_6eo24")
+shader_parameter/cursor = Vector2(-0.702, 0.384)
 shader_parameter/debug = null
 shader_parameter/rect_position = Vector2(-2, -2)
 shader_parameter/rect_size = Vector2(4, 4)
@@ -47,6 +48,7 @@ layout_mode = 2
 theme_override_constants/separation = 60
 
 [node name="Mandelbrot" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 fractalType = 1
@@ -57,11 +59,10 @@ rect_size = Vector2(4, 4)
 palette_image = ExtResource("3_s6hs8")
 
 [node name="Julia" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_45h1s")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 fractalType = 2
 shader_material = SubResource("ShaderMaterial_r5ea2")
 rect_position = Vector2(-2, -2)
 rect_size = Vector2(4, 4)
-
-[connection signal="update_cursor" from="MarginContainer/HBoxContainer/Mandelbrot" to="MarginContainer/HBoxContainer/Julia" method="set_cursor"]

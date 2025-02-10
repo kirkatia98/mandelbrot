@@ -3,7 +3,6 @@ class_name Fractal extends Control
 
 signal update_labels
 signal update_shader
-signal update_cursor
 
 enum FractalType { NONE, MANDLEBROT, JULIA }
 @export var fractalType: FractalType
@@ -42,6 +41,13 @@ enum FractalType { NONE, MANDLEBROT, JULIA }
 		update_labels.emit()
 
 
+@export var cursor : Vector2 = Vector2(-0.702, 0.384):
+	set(val):
+		cursor = val
+		shader_material.set_shader_parameter("cursor", cursor)
+		update_labels.emit()
+
+
 @export var palette_image : Texture2D:
 	set(val):
 		palette_image = val
@@ -52,6 +58,7 @@ enum FractalType { NONE, MANDLEBROT, JULIA }
 	set(val):
 		debug = val
 		shader_material.set_shader_parameter("debug", debug)
+
 
 
 @onready var on_screen : bool = false
@@ -101,6 +108,7 @@ func compute_point(max_loops : int, coord : Vector2):
 		FractalType.MANDLEBROT:
 			c = coord
 		FractalType.JULIA:
+			c = cursor
 			z = coord
 
 	var zp : Vector2
@@ -123,11 +131,6 @@ func _process(delta):
 	var target_position = rect_position - rect_size * input_vector
 
 	rect_position = lerp(rect_position, target_position, delta)
-
-# the mandlebrot instance emits a signal that the julia instance connects to
-func set_cursor(cursor : Vector2):
-	#update cursor variable in the julia set
-	shader_material.set_shader_parameter("cursor", cursor)
 
 
 # drag and zoom input using a mouse
@@ -184,8 +187,8 @@ func _input(event):
 			MOUSE_BUTTON_RIGHT:
 				drag_julia = event.is_pressed()
 
-				if drag_julia:
-					update_cursor.emit(shader_coords)
+				if drag_julia and FractalType.MANDLEBROT:
+					%Julia.cursor = shader_coords
 				pass
 
 
@@ -196,5 +199,5 @@ func _input(event):
 			# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
 			rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
 
-		if drag_julia:
-			update_cursor.emit(shader_coords)
+		if drag_julia and FractalType.MANDLEBROT:
+			%Julia.cursor = shader_coords

@@ -2,6 +2,8 @@ shader_type canvas_item;
 
 #include "lib.gdshaderinc"
 
+uniform vec2 cursor;
+
 uniform bool debug;
 
 uniform vec2 rect_position = vec2(-2);

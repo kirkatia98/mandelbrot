@@ -2,7 +2,6 @@ shader_type canvas_item;
 
 #include "lib.gdshaderinc"
 
-// TODO: use a controller inside the mandlebrot shader to get a c value for the julia set
 uniform vec2 cursor;
 
 uniform bool debug;
