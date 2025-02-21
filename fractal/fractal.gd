@@ -4,14 +4,17 @@ class_name Fractal extends Control
 signal update_labels
 signal update_shader
 
-enum FractalType { NONE, MANDLEBROT, JULIA }
-@export var fractalType: FractalType
+enum FractalType { FRACTAL, MANDELBROT, JULIA }
+@export var fractalType: FractalType:
+	set(val):
+		fractalType = val
+		update_labels.emit()
+
 
 @export var palette : Palette.Enum:
 	set(val):
 		palette = val
 		palette_image = pm.textures[val]
-
 
 @export var pan_speed : float = 0.05
 @export var zoom_speed : float = 0.95
@@ -103,9 +106,9 @@ func compute_point(max_loops : int, coord : Vector2):
 	var c : Vector2 = Vector2(0.0, 0.0)
 
 	match(fractalType):
-		FractalType.NONE:
+		FractalType.FRACTAL:
 			return 0
-		FractalType.MANDLEBROT:
+		FractalType.MANDELBROT:
 			c = coord
 		FractalType.JULIA:
 			c = cursor
@@ -187,10 +190,6 @@ func _input(event):
 			MOUSE_BUTTON_RIGHT:
 				drag_julia = event.is_pressed()
 
-				if drag_julia and FractalType.MANDLEBROT:
-					%Julia.cursor = shader_coords
-				pass
-
 
 	if event is InputEventMouseMotion:
 
@@ -199,5 +198,6 @@ func _input(event):
 			# move rectangle to the old position offset by mouse movement (scaled to the size of the screen)
 			rect_position = old_pos - (local_mouse - old_mouse) / screen_rect.size * rect_size
 
-		if drag_julia and FractalType.MANDLEBROT:
-			%Julia.cursor = shader_coords
+
+	if drag_julia:
+		%Julia.cursor = shader_coords

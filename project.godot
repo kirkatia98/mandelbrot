@@ -23,10 +23,6 @@ window/size/viewport_width=1806
 window/size/viewport_height=1000
 window/size/mode=2
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
-
 [input]
 
 zoom_in={

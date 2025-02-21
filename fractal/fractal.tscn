@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctmsc8syid57c"]
+[gd_scene load_steps=14 format=3 uid="uid://ctmsc8syid57c"]
 
 [ext_resource type="Script" path="res://fractal/fractal.gd" id="2_cw1qa"]
 [ext_resource type="Resource" uid="uid://xsnsugxoclvp" path="res://palette/palette_manager.tres" id="2_kjhv3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://6wkpxm0ouq8a" path="res://palette/textures/ayy4-1x.png" id="4_x832o"]
 [ext_resource type="Script" path="res://fractal/screen.gd" id="6_ehckw"]
 [ext_resource type="Script" path="res://fractal/boundary_coordinates.gd" id="6_wgcb1"]
+[ext_resource type="Script" path="res://fractal/description.gd" id="7_3qnub"]
 [ext_resource type="Script" path="res://fractal/debug_hints.gd" id="7_hf5sh"]
 [ext_resource type="PackedScene" uid="uid://b14scxdvion88" path="res://palette/palette_selection.tscn" id="8_c7m4k"]
 [ext_resource type="LabelSettings" uid="uid://dlq3j8j4ty580" path="res://fractal/label_settings.tres" id="8_nua8f"]
@@ -65,6 +66,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_ehckw")
 f = NodePath("../../..")
+
+[node name="Description" type="MarginContainer" parent="." node_paths=PackedStringArray("f", "Name", "Cursor")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_top = -40.0
+offset_right = 53.5
+offset_bottom = -20.0
+grow_horizontal = 2
+script = ExtResource("7_3qnub")
+f = NodePath("..")
+Name = NodePath("HBoxContainer/Name")
+Cursor = NodePath("HBoxContainer/Cursor")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Description"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Name" type="Label" parent="Description/HBoxContainer"]
+layout_mode = 2
+text = "FRACTAL"
+label_settings = ExtResource("8_nua8f")
+
+[node name="Cursor" type="Label" parent="Description/HBoxContainer"]
+layout_mode = 2
+label_settings = ExtResource("8_nua8f")
 
 [node name="Boundary Coordinates" type="MarginContainer" parent="." node_paths=PackedStringArray("f", "TL", "TR", "BR", "BL")]
 layout_mode = 1
@@ -185,6 +214,7 @@ layout_mode = 2
 script = ExtResource("9_vyt5m")
 f = NodePath("../../..")
 
+[connection signal="update_labels" from="." to="Description" method="_on_fractal_update_labels"]
 [connection signal="update_labels" from="." to="Boundary Coordinates" method="_on_fractal_update_labels"]
 [connection signal="update_labels" from="." to="Debug Hints" method="_on_fractal_update_labels"]
 [connection signal="update_shader" from="." to="Screen Viewport/SubViewport/Screen" method="_on_fractal_update_shader"]
